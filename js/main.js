@@ -97,7 +97,7 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                         } },
                         { src: 'plugin/sectiontitle/reveal.sectiontitle.js', async: false, callback: function() {
                             var sectionTitle = Reveal.SectionTitle({
-                                header: '<h2>Übersicht</h2>',
+                                header: $('.i18n>.section-overview').html(),
                                 wrapper: {
                                     start: '<div class="titles-parent"><div class="titles">',
                                     end: '</div></div>'
@@ -112,8 +112,7 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                 });
 
             });
-        })
-        ;
-    })
-})
-;
+        });
+
+    });
+});
