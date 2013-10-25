@@ -43,6 +43,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 
+/* if you use revealjs-charred
 .reveal .slides section .fragment.visible {
   opacity: 0.3; }
 
@@ -51,6 +52,7 @@
 
 .reveal .slides section .fragment.visible.focus {
   opacity: 1; }
+*/
 
 .reveal ul {
   list-style-type: square;}
