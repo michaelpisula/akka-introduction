@@ -62,6 +62,16 @@ body.charred .reveal .slides section .fragment.visible.focus {
   opacity: 1;
 }
 
+body.charred .reveal .slides section .fragment.highlight {
+  opacity: 1;
+}
+
+body.charred .reveal .slides section .fragment.highlight.focus {
+  background-color: yellow;
+  -webkit-border-radius: 4px;
+}
+
+
 .reveal ul {
   list-style-type: square;}
 
