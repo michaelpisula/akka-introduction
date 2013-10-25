@@ -103,8 +103,7 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                         } },
                         { src: 'plugin/charred-trail/charred-trail.js', async: true, condition: function() {
                             return !!document.body.classList;
-                        } },
-
+                        } }
                     ]
                 });
 
