@@ -42,79 +42,75 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
         window.marked = marked;
     }
 
-    require(['custom/loader'], function(CustomLoader) {
-        CustomLoader().initialize(function() {
-            require(['reveal', 'sylvester'], function(Reveal) {
-                require(['jqueryAnimateColors', 'jqueryBrowser', 'jqueryFlot', 'jquerySvg'], function() {
-                    require(['jqueryAnimateSvg'], function() {
-                        // The framework is now initialized
-                        var event = new CustomEvent("initialized", {});
-                        document.body.dispatchEvent(event);
+    require(['reveal', 'sylvester'], function(Reveal) {
+        require(['jqueryAnimateColors', 'jqueryBrowser', 'jqueryFlot', 'jquerySvg'], function() {
+            require(['jqueryAnimateSvg'], function() {
+                // The framework is now initialized
+                var event = new CustomEvent("initialized", {});
+                document.body.dispatchEvent(event);
 
-                        // Full list of configuration options available here:
-                        // https://github.com/hakimel/reveal.js#configuration
-                        Reveal.initialize({
-                            width: 1024,
-                            height: 768,
-                            controls: false,
-                            progress: true,
-                            history: true,
-                            center: true,
-                            rollingLinks: false,
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    width: 1024,
+                    height: 768,
+                    controls: false,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    rollingLinks: false,
 
-                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-                            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+                    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
-                            // Optional libraries used to extend on reveal.js
-                            dependencies: [
-                                { src: 'lib/js/classList.js', condition: function() {
-                                    return !document.body.classList;
-                                } },
-                                { src: 'plugin/markdown/markdown.js', condition: function() {
-                                    return !!document.querySelector('[data-markdown]');
-                                } },
-                                { src: 'plugin/highlight/highlight.js', callback: function() {
-                                    hljs.initHighlighting();
-                                } },
-                                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
-                                    return !!document.body.classList;
-                                } },
-                                { src: 'plugin/notes/notes.js', async: true, condition: function() {
-                                    return !!document.body.classList;
-                                } },
-                                { src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
-                                    var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
-                                        animationClass: 'animated-html',
-                                        duration: 500
-                                    });
-                                    quickAnimationsTransformer.transform();
-                                } },
-                                { src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
-                                    Reveal.Animate({
-                                        animationProviders: {
-                                            'animated-svg': Reveal.Animate.Svg(),
-                                            'animated-html': Reveal.Animate.Html()
-                                        }
-                                    });
-                                } },
-                                { src: 'plugin/sectiontitle/reveal.sectiontitle.js', async: false, callback: function() {
-                                    var sectionTitle = Reveal.SectionTitle({
-                                        header: '<h2>Übersicht</h2>',
-                                        wrapper: {
-                                            start: '<div class="titles-parent"><div class="titles">',
-                                            end: '</div></div>'
-                                        },
-                                        sectionClass: 'overview',
-                                        titleClass: 'title',
-                                        selectedTitleClass: 'selected-title'
-                                    });
-                                    sectionTitle.createSections();
-                                } }
-                            ]
-                        });
-
-                    });
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                        { src: 'lib/js/classList.js', condition: function() {
+                            return !document.body.classList;
+                        } },
+                        { src: 'plugin/markdown/markdown.js', condition: function() {
+                            return !!document.querySelector('[data-markdown]');
+                        } },
+                        { src: 'plugin/highlight/highlight.js', callback: function() {
+                            hljs.initHighlighting();
+                        } },
+                        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        } },
+                        { src: 'plugin/notes/notes.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        } },
+                        { src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
+                            var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
+                                animationClass: 'animated-html',
+                                duration: 500
+                            });
+                            quickAnimationsTransformer.transform();
+                        } },
+                        { src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
+                            Reveal.Animate({
+                                animationProviders: {
+                                    'animated-svg': Reveal.Animate.Svg(),
+                                    'animated-html': Reveal.Animate.Html()
+                                }
+                            });
+                        } },
+                        { src: 'plugin/sectiontitle/reveal.sectiontitle.js', async: false, callback: function() {
+                            var sectionTitle = Reveal.SectionTitle({
+                                header: '<h2>Übersicht</h2>',
+                                wrapper: {
+                                    start: '<div class="titles-parent"><div class="titles">',
+                                    end: '</div></div>'
+                                },
+                                sectionClass: 'overview',
+                                titleClass: 'title',
+                                selectedTitleClass: 'selected-title'
+                            });
+                            sectionTitle.createSections();
+                        } }
+                    ]
                 });
+
             });
         })
         ;
