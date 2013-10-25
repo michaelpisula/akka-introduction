@@ -80,13 +80,6 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                         { src: 'plugin/notes/notes.js', async: true, condition: function() {
                             return !!document.body.classList;
                         } },
-                        { src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
-                            var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
-                                animationClass: 'animated-html',
-                                duration: 500
-                            });
-                            quickAnimationsTransformer.transform();
-                        } },
                         { src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
                             Reveal.Animate({
                                 animationProviders: {
