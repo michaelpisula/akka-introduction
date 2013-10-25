@@ -65,6 +65,19 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
 
                     // Optional libraries used to extend on reveal.js
                     dependencies: [
+                        { src: 'plugin/sectiontitle/reveal.sectiontitle.js', async: false, callback: function() {
+                            var sectionTitle = Reveal.SectionTitle({
+                                header: $('.i18n>.section-overview').html(),
+                                wrapper: {
+                                    start: '<div class="titles-parent"><div class="titles">',
+                                    end: '</div></div>'
+                                },
+                                sectionClass: 'overview',
+                                titleClass: 'title',
+                                selectedTitleClass: 'selected-title'
+                            });
+                            sectionTitle.createSections();
+                        } },
                         { src: 'lib/js/classList.js', condition: function() {
                             return !document.body.classList;
                         } },
@@ -91,19 +104,7 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                         { src: 'plugin/charred-trail/charred-trail.js', async: true, condition: function() {
                             return !!document.body.classList;
                         } },
-                        { src: 'plugin/sectiontitle/reveal.sectiontitle.js', async: false, callback: function() {
-                            var sectionTitle = Reveal.SectionTitle({
-                                header: $('.i18n>.section-overview').html(),
-                                wrapper: {
-                                    start: '<div class="titles-parent"><div class="titles">',
-                                    end: '</div></div>'
-                                },
-                                sectionClass: 'overview',
-                                titleClass: 'title',
-                                selectedTitleClass: 'selected-title'
-                            });
-                            sectionTitle.createSections();
-                        } }
+
                     ]
                 });
 
