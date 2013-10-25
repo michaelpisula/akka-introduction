@@ -51,18 +51,6 @@
 
 .reveal .slides section .fragment.visible.focus {
   opacity: 1; }
- 
-
-.reveal .slides section .fragment.highlight-yellow {
-  opacity: 1; }
-.reveal .slides section .fragment.highlight-yellow.focus {
-  /*background-color: dimGray;*/
-  background-color: yellow;
-  -webkit-border-radius: 4px; }
-.reveal .slides section .fragment.highlight-red.focus {
-  color: black;
-  background-color: red;
-}
 
 .reveal ul {
   list-style-type: square;}
