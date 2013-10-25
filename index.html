@@ -22,45 +22,60 @@
     <p style="padding-top:15%">
         <a href="mailto:john.doe@tngtech.com">John Doe</a>, &lt;location&gt; 20XX-XX-XX
     </p>
-    <a href="http://www.tngtech.com"><img class="logo" src="img/tng-logo.svg"></a>
+    <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
 
-<section data-title="Section 1">
+<section data-title="Einfache Elemente">
 
     <section>
+        <h2>Dies ist eine Überschrift</h2>
+
+        <p style="margin-top: 50px;">Ein Element in der Präsentation</p>
+        <p class="not-printed" style="margin-top: 30px;">Dieses Element wird nicht gedruckt</p>
+        <p style="margin-top: 30px;">Dieses Element wird dagegen wieder gedruckt</p>
+    </section>
+
+    <section>
+        <h2>Präsentation in HTML</h2>
+        <h3>Level-3-Überschrift</h3>
+
+        <p>Dieser Text wurde in HTML geschrieben</p>
         <ul>
-            <li>Punkt 1</li>
-            <li>Punkt 2</li>
+            <li>Listenpunkt 1</li>
+            <li>Listenpunkt 2</li>
         </ul>
-        <div class="not-printed">x</div>
-        <div>y</div>
+
+        <pre><code class="sql">-- Code kann auch geschrieben werden
+SELECT *
+FROM Table
+WHERE key='value';</code></pre>
     </section>
 
     <section data-markdown>
         <script type="text/template">
-            ## Foo
-            ### Bla
+            ## Präsentation in Markdown
+            ### Level-3-Überschrift
 
-            Foo bar blubb
+            Dieser Text wurde in Markdown geschrieben
 
-            * Punkt 1
-            * Punkt 2
+            * Listenpunkt 1
+            * Listenpunkt 2
 
             ```sql
+            -- Code kann auch geschrieben werden
             SELECT *
-            FROM abc
-            WHERE xyz='foo';
+            FROM Table
+            WHERE key='value';
             ```
         </script>
     </section>
 
 </section>
 
-<section data-title="Section 2">
+<section data-title="Animationen">
 
     <section>
         <h2>Animierte Elemente</h2>
-
         <p>Schnelle Variante</p>
 
         <br/>
@@ -75,7 +90,6 @@
 
     <section>
         <h2>Animierte Elemente</h2>
-
         <p>Komplexe Variante</p>
 
         <div class="animated-html" style="height: 600px;">
@@ -95,17 +109,23 @@
 
 
     <section>
-        <h2>SVG Transform</h2>
+        <h2>Animierte Elemente</h2>
+        <p>SVG</p>
 
-        <div class="svg animated-svg" src="img/test/test.svg" style="width: 640px; height: 480px; border: 1px solid black;">
+        <div class="svg animated-svg" src="img/test/tng.svg" style="margin-left: 320px; margin-top: 30px; width: 400px; height: 200px;">
             <initial>
-                <state data-id="anim" data-property="transform" data-value="translate(100, 100)"></state>
+                <state data-id="TNG" data-property="opacity" data-value="0"></state>
+                <state data-id="technology-consulting" data-property="opacity" data-value="0"></state>
             </initial>
             <animation data-duration="500">
-                <animate data-id="anim" data-property="transform" data-value="translate(0, 100)"></animate>
+                <animate data-id="TNG" data-property="opacity" data-value="1"></animate>
+                <animate data-id="technology-consulting" data-property="opacity" data-value="1"></animate>
             </animation>
             <animation data-duration="500">
-                <animate data-id="anim" data-property="transform" data-value="translate(-100, 0)"></animate>
+                <animate data-id="TNG" data-property="transform" data-value="translate(-114, 63)"></animate>
+            </animation>
+            <animation data-duration="500">
+                <animate data-id="technology-consulting" data-property="transform" data-value="translate(113, -66)"></animate>
             </animation>
         </div>
     </section>
@@ -122,7 +142,7 @@
             <a href="https://www.xing.com/profile/John_Doe/">https://www.xing.com/profile/John_Doe</a><br>
             <a href="http://www.twitter.com/johndoe">@johndoe</a>
         </p>
-        <a href="http://www.tngtech.com"><img class="logo" src="img/tng-logo.svg"></a>
+        <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
     </section>
 
 </body>
