@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <g id="anim-group" transform="translate(400, 200) rotate(35, 0, 0)">
+   <rect fill="#ffffff" stroke="#000000" stroke-width="3" x="0" y="0" width="128" height="115" />
+   <rect fill="#ffffff" stroke="#000000" stroke-width="3" x="60" y="50" width="84" height="86" />
+  </g>
+  <g transform="translate(200, 100)">
+    <rect id="anim" transform="translate(10, 10)" fill="#ffffff" stroke="#000000" stroke-width="3" x="0" y="0" width="72" height="58" />
+  </g>
+ </g>
+</svg>

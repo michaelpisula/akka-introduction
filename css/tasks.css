@@ -1,0 +1,90 @@
+ul.tasks {
+    list-style: none none;
+
+    margin: 0 0 0 20px;
+
+    padding: 0;
+}
+
+ul.tasks li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+ul.tasks select {
+    border: 1px solid black;
+}
+
+ul.tasks .large-column {
+    width: 570px;
+}
+
+ul.tasks li>*:first-child {
+    vertical-align: top;
+}
+
+ul.tasks li div {
+    display: inline-block;
+}
+
+ul.tasks .large-column span {
+    display: block;
+    font-size: 70%;
+}
+
+ul.students {
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+ul.students li {
+    display: inline-block;
+
+    width: 500px;
+}
+
+ul.students li:not(.has-task):before {
+    content: url("../img/tasks/has-no-task.png");
+    margin-right: 10px;
+}
+
+ul.students li.has-task:before {
+    content: url("../img/tasks/has-task.png");
+    margin-right: 10px;
+}
+
+ul.students li:nth-child(odd) {
+    float: left;
+}
+
+ul.students li:nth-child(even) {
+    clear: both;
+}
+
+.tasks input, .tasks select, .tasks select option {
+    width: 400px;
+
+    font-size: 90%;
+}
+
+.tasks select {
+    background: transparent;
+    width: 400px;
+    font-size: 90%;
+
+    border: 0;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#button-clear {
+    position: absolute;
+
+    font-size: 20px;
+
+    top: 12px;
+    right: 10px;
+}
