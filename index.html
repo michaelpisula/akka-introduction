@@ -37,6 +37,7 @@
 
     <section>
         <h2>Präsentation in HTML</h2>
+
         <h3>Level-3-Überschrift</h3>
 
         <p>Dieser Text wurde in HTML geschrieben</p>
@@ -72,11 +73,25 @@ WHERE key='value';</code></pre>
 
 </section>
 
+<section data-title="Übersichtsfolien">
+    <section>
+        <h2>Überblick</h2>
+
+        <p>Alle Sections auf oberster Ebene, <br/>die ein Attribut, "data-title" besitzen:</p>
+        <ul>
+            <li>Erhalten eine Übersichtsseite (wo stehen wir gerade?)</li>
+            <li>Werden mit ihrem Titel auf der Übersichtsseite angezeigt</li>
+        </ul>
+    </section>
+</section>
+
 <section data-title="Animationen">
 
     <section>
         <h2>Animierte Elemente</h2>
         <p>Schnelle Variante</p>
+
+        <p style="margin-top: 30px;">Über die CSS-Klasse "fragment" werden Elemente zuerst ausgeblendet und dann nach und nach angezeigt</p>
 
         <br/>
         <p class="fragment">Erster Absatz</p>
@@ -92,16 +107,18 @@ WHERE key='value';</code></pre>
         <h2>Animierte Elemente</h2>
         <p>Komplexe Variante</p>
 
+        <p style="margin-top: 30px;">HTML-Animationen können über die CSS-Klasse "animated-html" erstellt werden</p>
+
         <div class="animated-html" style="height: 600px;">
             <animation data-duration="500">
                 <animate data-id="box" data-property="opacity" data-value="1"></animate>
             </animation>
             <animation data-duration="500">
-                <animate data-id="box" data-property="top" data-value="400px"></animate>
+                <animate data-id="box" data-property="top" data-value="500px"></animate>
                 <animate data-id="box" data-property="left" data-value="400px"></animate>
             </animation>
 
-            <div id="box" style="position: absolute; left: 200px; top: 200px; width: 400px; border: 1px solid black; opacity: 0;">
+            <div id="box" style="position: absolute; left: 200px; top: 300px; width: 400px; border: 1px solid black; opacity: 0;">
                 Dieser Text wird sich bewegen
             </div>
         </div>
@@ -111,6 +128,8 @@ WHERE key='value';</code></pre>
     <section>
         <h2>Animierte Elemente</h2>
         <p>SVG</p>
+
+        <p style="margin-top: 30px;">SVG-Animationen können über die CSS-Klasse "animated-svg" erstellt werden</p>
 
         <div class="svg animated-svg" src="img/test/tng.svg" style="margin-left: 320px; margin-top: 30px; width: 400px; height: 200px;">
             <initial>
