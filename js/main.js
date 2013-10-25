@@ -54,20 +54,16 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                         // Full list of configuration options available here:
                         // https://github.com/hakimel/reveal.js#configuration
                         Reveal.initialize({
-                            margin: 0,
-
-                            //minScale: 1.0,
-                            //maxScale: 1.0,
-
+                            width: 1024,
+                            height: 768,
                             controls: false,
-                            progress: false,
+                            progress: true,
                             history: true,
                             center: true,
-
-                            theme: 'sky', // available themes are in /css/theme
-                            transition: 'cube', // default/cube/page/concave/zoom/linear/fade/none
-
                             rollingLinks: false,
+
+                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
                             // Optional libraries used to extend on reveal.js
                             dependencies: [
