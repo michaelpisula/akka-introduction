@@ -5,6 +5,13 @@
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 
+@import url(reveal.min.css);
+
+@import url(print/pdf.css) print;
+
+/* syntax highlighting */
+@import url(github.css);
+
 @font-face {
   font-family: 'Lato';
   font-style: normal;
@@ -43,16 +50,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 
-/* if you use revealjs-charred
-.reveal .slides section .fragment.visible {
-  opacity: 0.3; }
+body.charred .reveal .slides section .fragment.visible {
+  opacity: 0.3;
+}
 
-.reveal .slides section .fragment.visible.no-burn {
-  opacity: 1; }
+body.charred .reveal .slides section .fragment.visible.no-burn {
+  opacity: 1;
+}
 
-.reveal .slides section .fragment.visible.focus {
-  opacity: 1; }
-*/
+body.charred .reveal .slides section .fragment.visible.focus {
+  opacity: 1;
+}
 
 .reveal ul {
   list-style-type: square;}
@@ -237,3 +245,14 @@ body {
   -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+
+/* apply .not-printed to elements that should not be displayed in hardcopy */
+@media print {
+  .not-printed {
+    visibility: hidden !important;
+  }
+  .reveal .slides section.not-printed {
+    display: none !important;
+  }
+}
