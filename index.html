@@ -8,7 +8,7 @@
     <meta name="description" content="Der Inhalt des Vortrags"><!-- FIXME -->
     <meta name="author" content="Thomas Endres, Michael Pisula, Eric Weikl"><!-- FIXME -->
 
-    <link rel="stylesheet" href="css/tng.css" id="theme">
+    <link rel="stylesheet" href="css/all.css" id="theme">
     <script data-main="js/main" src="js/vendor/require.js"></script>
 </head>
 
@@ -54,10 +54,10 @@
     <ol>
       <li>Style: TNG-ähnliche Farben &amp; Schriften, Logo, weniger nervige Slide-Animationen</li>
       <li>Auf <a href="http://requirejs.org">RequireJS</a> umgestellt, um das Reveal.js-Plumbing vom Content zu trennen
-        <p>
+        <div>
           <span style="color: red">Vorsicht!</span> Dadurch kann die Präsentation nur in einem Webserver angesehen werden, z.B.
           <pre><code class="shell">$ python -m SimpleHTTPServer 9999</code></pre>
-        </p>
+        </div>
       </li>
       <li>Zusätzliche Plugins mitgeliefert, die sich bewährt haben:
         <ul class="no-burn">
@@ -167,9 +167,9 @@ WHERE key='value';</code></pre>
   <section>
     <p>Bei Source-Code Beispielen kann man die Stelle, über die man gerade spricht, fokussieren:</p>
     <pre><code class="java" data-noescape>
-      public <span class="fragment highlight" data-fragment-index="1">class HelloWorld</span> {
-        public static <span class="fragment highlight" data-fragment-index="4">void</span> <span class="fragment highlight" data-fragment-index="2">main</span>(<span class="fragment highlight" data-fragment-index="3">String[] args</span>) {
-          <span class="fragment highlight" data-fragment-index="5">System.out.println("Hello World!");</span>
+      public ^1^class^^ HelloWorld {
+        public static ^4^void^^ ^2^main^^(^3^String[] args^^) {
+          ^5^System.out.println("Hello World!");^^
         }
       }</code></pre>
         </section>

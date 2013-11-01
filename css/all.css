@@ -1,5 +1,2 @@
-@import url(reveal.css);
-@import url(theme/simple.css);
+@import url(tng.css);
 @import url(custom.css);
-@import url(../lib/css/zenburn.css);
-@import url(print/pdf.css) print;

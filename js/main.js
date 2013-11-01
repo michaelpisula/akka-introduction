@@ -35,7 +35,9 @@ require.config({
 
 require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head, $, marked, StructureBuilder) {
     // Adds ".reveal .slides" section
-    StructureBuilder().buildRevealStructure();
+    var structureBuilder = StructureBuilder();
+    structureBuilder.buildRevealStructure();
+    structureBuilder.highlightCode();
 
     // Since we both use AMD and non-AMD plugins, we must load marked asynchronously
     if (!!document.querySelector('[data-markdown]')) {
