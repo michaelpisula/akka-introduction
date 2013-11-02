@@ -33,8 +33,7 @@ require.config({
 });
 
 
-require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head, $, marked, StructureBuilder) {
-    // Adds ".reveal .slides" section
+require(['head', 'jquery', 'marked', 'custom/structure.builder', 'custom/issue.fixer' ], function(head, $, marked, StructureBuilder, IssueFixer) {
     var structureBuilder = StructureBuilder();
     structureBuilder.buildRevealStructure();
     structureBuilder.highlightCode();
@@ -109,6 +108,8 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder' ], function(head
                     ]
                 });
 
+                var issueFixer = IssueFixer();
+                issueFixer.fixIssues();
             });
         });
 
