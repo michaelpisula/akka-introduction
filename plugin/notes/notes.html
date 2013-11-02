@@ -183,7 +183,7 @@
     }
 
     window.addEventListener('load', function() {
-
+        var selfInducedFragmentChange = 0;
 
         if (window.opener && window.opener.location && window.opener.location.href) {
 
@@ -210,10 +210,18 @@
 
                     // Showing and hiding fragments
                     if (data.fragment === 'next') {
-                        currentSlide.contentWindow.Reveal.nextFragment();
+                        if (selfInducedFragmentChange === 0) {
+                            currentSlide.contentWindow.Reveal.nextFragment();
+                        } else {
+                            selfInducedFragmentChange--;
+                        }
                     }
                     else if (data.fragment === 'prev') {
-                        currentSlide.contentWindow.Reveal.prevFragment();
+                        if (selfInducedFragmentChange === 0) {
+                            currentSlide.contentWindow.Reveal.prevFragment();
+                        } else {
+                            selfInducedFragmentChange--;
+                        }
                     }
                     else {
                         // Update the note slides
@@ -253,10 +261,17 @@
 
                 // Navigate the main window when the notes slide changes
                 currentSlide.contentWindow.Reveal.addEventListener('slidechanged', function(event) {
-
-                    window.opener.Reveal.slide(event.indexh, event.indexv);
-
+                    window.opener.Reveal.slide(event.indexh, event.indexv, event.indexf);
                 });
+                currentSlide.contentWindow.Reveal.addEventListener('fragmentshown', function() {
+                    selfInducedFragmentChange++;
+                    window.opener.Reveal.nextFragment();
+                });
+                currentSlide.contentWindow.Reveal.addEventListener('fragmenthidden', function() {
+                    selfInducedFragmentChange++;
+                    window.opener.Reveal.prevFragment();
+                });
+
             });
         }
         else {
