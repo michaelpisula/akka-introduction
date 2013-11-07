@@ -183,7 +183,8 @@
     }
 
     window.addEventListener('load', function() {
-        var selfInducedFragmentChange = 0;
+        var selfInducedFragmentChangeInSpeakerView = 0;
+        var selfInducedFragmentChangeInMainView = 0;
 
         if (window.opener && window.opener.location && window.opener.location.href) {
 
@@ -210,17 +211,19 @@
 
                     // Showing and hiding fragments
                     if (data.fragment === 'next') {
-                        if (selfInducedFragmentChange === 0) {
+                        if (selfInducedFragmentChangeInSpeakerView === 0) {
+                            selfInducedFragmentChangeInMainView++;
                             currentSlide.contentWindow.Reveal.nextFragment();
                         } else {
-                            selfInducedFragmentChange--;
+                            selfInducedFragmentChangeInSpeakerView--;
                         }
                     }
                     else if (data.fragment === 'prev') {
-                        if (selfInducedFragmentChange === 0) {
+                        if (selfInducedFragmentChangeInSpeakerView === 0) {
+                            selfInducedFragmentChangeInMainView++;
                             currentSlide.contentWindow.Reveal.prevFragment();
                         } else {
-                            selfInducedFragmentChange--;
+                            selfInducedFragmentChangeInSpeakerView--;
                         }
                     }
                     else {
@@ -264,12 +267,20 @@
                     window.opener.Reveal.slide(event.indexh, event.indexv, event.indexf);
                 });
                 currentSlide.contentWindow.Reveal.addEventListener('fragmentshown', function() {
-                    selfInducedFragmentChange++;
-                    window.opener.Reveal.nextFragment();
+                    if (selfInducedFragmentChangeInMainView == 0) {
+                        selfInducedFragmentChangeInSpeakerView++;
+                        window.opener.Reveal.nextFragment();
+                    } else {
+                        selfInducedFragmentChangeInMainView--;
+                    }
                 });
                 currentSlide.contentWindow.Reveal.addEventListener('fragmenthidden', function() {
-                    selfInducedFragmentChange++;
-                    window.opener.Reveal.prevFragment();
+                    if (selfInducedFragmentChangeInMainView == 0) {
+                        selfInducedFragmentChangeInSpeakerView++;
+                        window.opener.Reveal.prevFragment();
+                    } else {
+                        selfInducedFragmentChangeInMainView--;
+                    }
                 });
 
             });
