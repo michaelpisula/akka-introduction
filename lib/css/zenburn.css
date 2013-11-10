@@ -6,8 +6,9 @@ based on dark.css by Ivan Sagalaev
 */
 
 pre code {
-    display: block; padding: 0.5em;
-    color: #000000;
+  display: block; padding: 0.5em;
+  background: #3F3F3F;
+  color: #DCDCDC;
 }
 
 pre .keyword,
@@ -17,25 +18,25 @@ pre .django .keyword,
 pre .css .class,
 pre .css .id,
 pre .lisp .title {
-    color: #FF0000;
+  color: #E3CEAB;
 }
 
 pre .django .template_tag,
 pre .django .variable,
 pre .django .filter .argument {
-    color: #00FF00;
+  color: #DCDCDC;
 }
 
 pre .number,
 pre .date {
-    color: #0000FF;
+  color: #8CD0D3;
 }
 
 pre .dos .envvar,
 pre .dos .stream,
 pre .variable,
 pre .apache .sqbracket {
-    color: #FF00FF;
+  color: #EFDCBC;
 }
 
 pre .dos .flow,
@@ -44,12 +45,12 @@ pre .python .exception,
 pre .python .built_in,
 pre .literal,
 pre .tex .special {
-    color: #FFFF00;
+  color: #EFEFAF;
 }
 
 pre .diff .chunk,
 pre .ruby .subst {
-    color: #8F8F8F;
+  color: #8F8F8F;
 }
 
 pre .dos .keyword,
@@ -74,7 +75,7 @@ pre .ruby .symbol .keyword,
 pre .ruby .symbol .keymethods,
 pre .ruby .string,
 pre .ruby .instancevar {
-    color: #008888;
+  color: #DCA3A3;
 }
 
 pre .diff .deletion,
@@ -92,7 +93,7 @@ pre .attr_selector,
 pre .pseudo,
 pre .apache .cbracket,
 pre .tex .formula {
-    color: #777700;
+  color: #CC9393;
 }
 
 pre .shebang,
@@ -102,12 +103,13 @@ pre .java .annotation,
 pre .template_comment,
 pre .pi,
 pre .doctype {
-    color: #7F9F7F;
+  color: #7F9F7F;
 }
 
 pre .xml .css,
 pre .xml .javascript,
 pre .xml .vbscript,
 pre .tex .formula {
-    opacity: 0.5;
+  opacity: 0.5;
 }
+
