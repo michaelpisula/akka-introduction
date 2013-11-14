@@ -1,289 +1,393 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 
-    <title>reveal.js - Slide Notes</title>
+		<title>reveal.js - Slide Notes</title>
 
-    <style>
-        body {
-            font-family: Helvetica;
-        }
+		<style>
+			body {
+				font-family: Helvetica;
+				background-color: black;
+			}
 
-        #notes {
-            font-size: 24px;
-            width: 640px;
-            margin-top: 5px;
-            clear: left;
-        }
+			#notes {
+				font-size: 24px;
+				width: 640px;
+				margin-top: 5px;
+				clear: left;
+				color: white;
+			}
 
-        #wrap-current-slide {
-            width: 640px;
-            height: 512px;
-            float: left;
-            overflow: hidden;
-        }
+			#wrap-current-slide {
+				width: 640px;
+				height: 512px;
+				float: left;
+				overflow: hidden;
+			}
 
-        #current-slide {
-            width: 1280px;
-            height: 1024px;
-            border: none;
+			#current-slide {
+				width: 1280px;
+				height: 1024px;
+				border: none;
 
-            -webkit-transform-origin: 0 0;
-            -moz-transform-origin: 0 0;
-            -ms-transform-origin: 0 0;
-            -o-transform-origin: 0 0;
-            transform-origin: 0 0;
+				-webkit-transform-origin: 0 0;
+				   -moz-transform-origin: 0 0;
+					-ms-transform-origin: 0 0;
+					 -o-transform-origin: 0 0;
+						transform-origin: 0 0;
 
-            -webkit-transform: scale(0.5);
-            -moz-transform: scale(0.5);
-            -ms-transform: scale(0.5);
-            -o-transform: scale(0.5);
-            transform: scale(0.5);
-        }
+				-webkit-transform: scale(0.5);
+				   -moz-transform: scale(0.5);
+					-ms-transform: scale(0.5);
+					 -o-transform: scale(0.5);
+						transform: scale(0.5);
+			}
 
-        #wrap-next-slide {
-            width: 448px;
-            height: 358px;
-            float: left;
-            margin: 0 0 0 10px;
-            overflow: hidden;
-        }
+			#wrap-next-slide {
+				width: 448px;
+				height: 358px;
+				float: left;
+				margin: 0 0 0 10px;
+				overflow: hidden;
+			}
 
-        #next-slide {
-            width: 1280px;
-            height: 1024px;
-            border: none;
+			#next-slide {
+				width: 1280px;
+				height: 1024px;
+				border: none;
 
-            -webkit-transform-origin: 0 0;
-            -moz-transform-origin: 0 0;
-            -ms-transform-origin: 0 0;
-            -o-transform-origin: 0 0;
-            transform-origin: 0 0;
+				-webkit-transform-origin: 0 0;
+				   -moz-transform-origin: 0 0;
+					-ms-transform-origin: 0 0;
+					 -o-transform-origin: 0 0;
+						transform-origin: 0 0;
 
-            -webkit-transform: scale(0.35);
-            -moz-transform: scale(0.35);
-            -ms-transform: scale(0.35);
-            -o-transform: scale(0.35);
-            transform: scale(0.35);
-        }
+				-webkit-transform: scale(0.35);
+				   -moz-transform: scale(0.35);
+					-ms-transform: scale(0.35);
+					 -o-transform: scale(0.35);
+						transform: scale(0.35);
+			}
+			#wrap-current-slide.focus, #wrap-next-slide.focus {
+				color:red;
+				-webkit-box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
+				   -moz-box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+					 -o-box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
+						box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
+			}
 
-        .slides {
-            position: relative;
-            margin-bottom: 10px;
-            border: 1px solid black;
-            border-radius: 2px;
-            background: rgb(28, 30, 32);
-        }
+			.slides {
+				position: relative;
+				margin-bottom: 10px;
+				border: 1px solid black;
+				border-radius: 2px;
+				background: rgb(28, 30, 32);
+			}
 
-        .slides span {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            font-weight: bold;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-        }
+			.slides span {
+				position: absolute;
+				top: 3px;
+				left: 3px;
+				font-weight: bold;
+				font-size: 14px;
+				color: rgba( 255, 255, 255, 0.9 );
+			}
 
-        .error {
-            font-weight: bold;
-            color: red;
-            font-size: 1.5em;
-            text-align: center;
-            margin-top: 10%;
-        }
+			.error {
+				font-weight: bold;
+				color: red;
+				font-size: 1.5em;
+				text-align: center;
+				margin-top: 10%;
+			}
 
-        .error code {
-            font-family: monospace;
-        }
+			.error code {
+				font-family: monospace;
+			}
 
-        .time {
-            width: 448px;
-            margin: 30px 0 0 10px;
-            float: left;
-            text-align: center;
-            opacity: 0;
+			.time {
+				width: 448px;
+				margin: 30px 0 0 10px;
+				float: left;
+				text-align: center;
+				opacity: 0;
 
-            -webkit-transition: opacity 0.4s;
-            -moz-transition: opacity 0.4s;
-            -o-transition: opacity 0.4s;
-            transition: opacity 0.4s;
-        }
+				-webkit-transition: opacity 0.4s;
+				   -moz-transition: opacity 0.4s;
+				     -o-transition: opacity 0.4s;
+				        transition: opacity 0.4s;
+			}
 
-        .elapsed,
-        .clock {
-            color: #333;
-            font-size: 2em;
-            text-align: center;
-            display: inline-block;
-            padding: 0.5em;
-            background-color: #eee;
-            border-radius: 10px;
-        }
+			.elapsed,
+			.clock {
+				color: #333;
+				font-size: 2em;
+				text-align: center;
+				display: inline-block;
+				padding: 0.5em;
+				background-color: #eee;
+				border-radius: 10px;
+			}
 
-        .elapsed h2,
-        .clock h2 {
-            font-size: 0.8em;
-            line-height: 100%;
-            margin: 0;
-            color: #aaa;
-        }
+			.elapsed h2,
+			.clock h2 {
+				font-size: 0.8em;
+				line-height: 100%;
+				margin: 0;
+				color: #aaa;
+			}
 
-        .elapsed .mute {
-            color: #ddd;
-        }
+			.elapsed .mute {
+				display: none;
+			}
 
-    </style>
-</head>
+		</style>
+	</head>
 
-<body>
+	<body>
 
-<script>
-    function getNotesURL(controls) {
-        return window.opener.location.protocol + '//' + window.opener.location.host + window.opener.location.pathname + '?receiver&controls=' + ( controls || 'false' ) + '&progress=false&overview=false' + window.opener.location.hash;
-    }
-    var notesCurrentSlideURL = getNotesURL(true);
-    var notesNextSlideURL = getNotesURL(false);
-</script>
+		<div id="wrap-current-slide" class="slides">
+			<script>document.write( '<iframe width="1280" height="1024" id="current-slide" src="'+ window.opener.location.href +'?receiver"></iframe>' );</script>
+		</div>
 
-<div id="wrap-current-slide" class="slides">
-    <script>document.write('<iframe width="1280" height="1024" id="current-slide" src="' + notesCurrentSlideURL + '"></iframe>');</script>
-</div>
+		<div id="wrap-next-slide" class="slides">
+			<script>document.write( '<iframe width="640" height="512" id="next-slide" src="'+ window.opener.location.href +'?receiver"></iframe>' );</script>
+			<span>UPCOMING:</span>
+		</div>
 
-<div id="wrap-next-slide" class="slides">
-    <script>document.write('<iframe width="640" height="512" id="next-slide" src="' + notesNextSlideURL + '"></iframe>');</script>
-    <span>UPCOMING:</span>
-</div>
+		<div class="time">
+			<div class="clock">
+				<h2>Clock</h2>
+				<span id="clock">0:00:00 AM</span>
+			</div>
+			<div class="elapsed">
+				<h2>Presentation Timer</h2>
+				<span id="sign"></span><span id="hours">00:</span><span id="minutes">00:</span><span id="seconds">00</span>
+			</div>
+		</div>
 
-<div class="time">
-    <div class="clock">
-        <h2>Time</h2>
-        <span id="clock">0:00:00 AM</span>
-    </div>
-    <div class="elapsed">
-        <h2>Elapsed</h2>
-        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
-    </div>
-</div>
+		<div id="notes"></div>
 
-<div id="notes"></div>
-
-<script src="../../plugin/markdown/marked.js"></script>
-<script>
-
-    function waitForObjects(objects, callbackFunction) {
-        var waitAndTest = function() {
-            var loaded = true;
-            for (var i = 0; i < objects.length; i++) {
-                if (!objects[i].parent[objects[i].name]) {
-                    loaded = false;
-                    break;
-                }
-            }
-
-            if (!loaded) {
-                setTimeout(waitAndTest, 200);
-            } else {
-                callbackFunction.apply(this);
-            }
-        }
-        waitAndTest();
-    }
-
-    window.addEventListener('load', function() {
-
-        if (window.opener && window.opener.location && window.opener.location.href) {
-
-            var notes = document.getElementById('notes'),
-                    currentSlide = document.getElementById('current-slide'),
-                    nextSlide = document.getElementById('next-slide'),
-                    silenced = false;
-
-            waitForObjects([
-                {parent: currentSlide.contentWindow, name: 'Reveal'},
-                {parent: nextSlide.contentWindow, name: 'Reveal'}
-            ], function() {
-
-                window.addEventListener('message', function(event) {
-                    var data = JSON.parse(event.data);
-
-                    // No need for updating the notes in case of fragment changes
-                    if (data.notes !== undefined) {
-                        if (data.markdown) {
-                            notes.innerHTML = marked(data.notes);
-                        }
-                        else {
-                            notes.innerHTML = data.notes;
+		<script src="../../plugin/markdown/marked.js"></script>
+		<script>
+            var waitForObjects = function(objects, callbackFunction) {
+                var waitAndTest = function() {
+                    var loaded = true;
+                    for (var i = 0; i < objects.length; i++) {
+                        if (!objects[i].parent[objects[i].name]) {
+                            loaded = false;
+                            break;
                         }
                     }
 
-                    silenced = true;
-
-                    // Update the note slides
-                    currentSlide.contentWindow.Reveal.slide(data.indexh, data.indexv, data.indexf);
-                    nextSlide.contentWindow.Reveal.slide(data.nextindexh, data.nextindexv);
-
-                    silenced = false;
-
-                }, false);
-
-                var start = new Date(),
-                        timeEl = document.querySelector('.time'),
-                        clockEl = document.getElementById('clock'),
-                        hoursEl = document.getElementById('hours'),
-                        minutesEl = document.getElementById('minutes'),
-                        secondsEl = document.getElementById('seconds');
-
-                setInterval(function() {
-
-                    timeEl.style.opacity = 1;
-
-                    var diff, hours, minutes, seconds,
-                            now = new Date();
-
-                    diff = now.getTime() - start.getTime();
-                    hours = Math.floor(diff / ( 1000 * 60 * 60 ));
-                    minutes = Math.floor(( diff / ( 1000 * 60 ) ) % 60);
-                    seconds = Math.floor(( diff / 1000 ) % 60);
-
-                    clockEl.innerHTML = now.toLocaleTimeString();
-                    hoursEl.innerHTML = zeroPadInteger(hours);
-                    hoursEl.className = hours > 0 ? "" : "mute";
-                    minutesEl.innerHTML = ":" + zeroPadInteger(minutes);
-                    minutesEl.className = minutes > 0 ? "" : "mute";
-                    secondsEl.innerHTML = ":" + zeroPadInteger(seconds);
-
-                }, 1000);
-
-                // Broadcasts the state of the notes window to synchronize
-                // the main window
-                function synchronizeMainWindow() {
-
-                    if (!silenced) {
-                        var indices = currentSlide.contentWindow.Reveal.getIndices();
-                        window.opener.Reveal.slide(indices.h, indices.v, indices.f);
+                    if (!loaded) {
+                        setTimeout(waitAndTest, 200);
+                    } else {
+                        callbackFunction.apply(this);
                     }
+                };
+                waitAndTest();
+            };
 
+			var SpeakerView = function() {
+				var master = window.opener;
+				var current = document.getElementById('current-slide').contentWindow;
+				var upcoming = document.getElementById('next-slide').contentWindow;
+
+                function synchronize(sourceWindow) { return function() {
+                    var sourceIndices = sourceWindow.Reveal.getIndices();
+                    var sourceSlide = sourceWindow.Reveal.getCurrentSlide();
+                    var upcomingIndices = (function() {
+                        var isLastSlideV = !!(sourceSlide.nextElementSibling && sourceSlide.parentNode.nodeName == 'SECTION');
+                        return {
+                            h: isLastSlideV ? sourceIndices.h : sourceIndices.h + 1,
+                            v: isLastSlideV ? sourceIndices.v + 1 : 0
+                        };
+                    })();
+                    var masterIndices = master.Reveal.getIndices();
+                    var currentIndices = current.Reveal.getIndices();
+                    var updateMaster, updateCurrent;
+
+                    updateMaster = !((masterIndices.h == sourceIndices.h)
+                            && (masterIndices.v == sourceIndices.v)
+                            && (masterIndices.f == sourceIndices.f));
+                    if(updateMaster) master.Reveal.slide(sourceIndices.h, sourceIndices.v, sourceIndices.f);
+
+                    updateCurrent = !((currentIndices.h == sourceIndices.h)
+                            && (currentIndices.v == sourceIndices.v)
+                            && (currentIndices.f == sourceIndices.f));
+                    if(updateCurrent) current.Reveal.slide(sourceIndices.h, sourceIndices.v, sourceIndices.f);
+
+                    hideOverview(upcoming)();
+                    upcoming.Reveal.slide(upcomingIndices.h, upcomingIndices.v);
+
+                    updateNotes();
+                };}
+
+                // 2nd order function to synchronize all Reveal windows with sourceWindow
+                function updateNotes() {
+                    var notesContainer = document.getElementById( 'notes' );
+                    var markdown = !!notesContainer && typeof notesContainer.getAttribute('data-markdown') === 'string';
+                    var notesContent = master.Reveal.getCurrentSlide().querySelector('aside.notes');
+                    var notes = notesContent ? notesContent.innerHTML : '';
+                    notesContainer.innerHTML = markdown ? marked(notes) : notes;
                 }
 
-                // Navigate the main window when the notes slide changes
-                currentSlide.contentWindow.Reveal.addEventListener('slidechanged', synchronizeMainWindow);
-                currentSlide.contentWindow.Reveal.addEventListener('fragmentshown', synchronizeMainWindow);
-                currentSlide.contentWindow.Reveal.addEventListener('fragmenthidden', synchronizeMainWindow);
-            });
-        }
-        else {
-            document.body.innerHTML = '<p class="error">Unable to access <code>window.opener.location</code>.<br>Make sure the presentation is running on a web server.</p>';
-        }
+                // 2nd order functions to pause and resume Reveal in window win
+                function pause(win) { return function() {
+                    if(!win.Reveal.isPaused()) win.Reveal.togglePause();
+                };}
+                function resume(win) { return function() {
+                    if(win.Reveal.isPaused()) win.Reveal.togglePause();
+                };}
 
+                // 2nd order functions to show and hide overview in window win
+                function showOverview(win) { return function() {
+                    if(!win.Reveal.isOverview()) win.Reveal.toggleOverview();
+                };}
+                function hideOverview(win) { return function() {
+                    if(win.Reveal.isOverview()) win.Reveal.toggleOverview();
+                };}
 
-    }, false);
+                function startSpeakerView() {
+                    console.log("Waiting done");
 
-    function zeroPadInteger(num) {
-        var str = "00" + parseInt(num);
-        return str.substring(str.length - 2);
-    }
+                    // 1st order functions from 2nd order functions
+                    var syncMaster = synchronize(master), syncCurrent = synchronize(current),
+                        syncUpcoming = synchronize(upcoming);
+                    var pauseMaster  = pause(master),  resumeMaster  = resume(master),
+                        pauseCurrent = pause(current), resumeCurrent = resume(current),
+                        showOverviewMaster  = showOverview(master),  hideOverviewMaster  = hideOverview(master),
+                        showOverviewCurrent = showOverview(current), hideOverviewCurrent = hideOverview(current);
 
-</script>
-</body>
+                    // synchronize slide/fragment change events
+                    master.Reveal.addEventListener('slidechanged',   syncMaster, false);
+                    master.Reveal.addEventListener('fragmentshown',  syncMaster, false);
+                    master.Reveal.addEventListener('fragmenthidden', syncMaster, false);
+                    current.Reveal.addEventListener('slidechanged',   syncCurrent, false);
+                    current.Reveal.addEventListener('fragmentshown',  syncCurrent, false);
+                    current.Reveal.addEventListener('fragmenthidden', syncCurrent, false);
+
+                    // patch pause/resume and overview from current to master and vice versa
+                    current.Reveal.addEventListener('paused',   pauseMaster, false);
+                    current.Reveal.addEventListener('resumed', resumeMaster, false);
+                    master.Reveal.addEventListener('paused',   pauseCurrent, false);
+                    master.Reveal.addEventListener('resumed', resumeCurrent, false);
+                    current.Reveal.addEventListener('overviewshown',  showOverviewMaster, false);
+                    current.Reveal.addEventListener('overviewhidden', hideOverviewMaster, false);
+                    master.Reveal.addEventListener('overviewshown',  showOverviewCurrent, false);
+                    master.Reveal.addEventListener('overviewhidden', hideOverviewCurrent, false);
+
+                    // Enter in upcoming loads the slide in master and current
+                    // use Reveal's configure({keyboard: {...}}) method
+                    upcoming.Reveal.configure({ keyboard: { 13: function() {
+                        syncUpcoming();
+                        current.focus();
+                    } } });
+
+                    // Add "glow" effect to Iframes so we can see which frame is focussed
+                    // TODO check if this works in IE, see http://www.quirksmode.org/blog/archives/2008/04/delegating_the.html
+                    current.onfocus = function() { document.getElementById('wrap-current-slide').classList.add("focus");    current.Reveal.configure({ controls: true }); };
+                    current.onblur  = function() { document.getElementById('wrap-current-slide').classList.remove("focus"); current.Reveal.configure({ controls: false }); };
+                    upcoming.onfocus = function() { document.getElementById('wrap-next-slide').classList.add("focus");    upcoming.Reveal.configure({ controls: true }); };
+                    upcoming.onblur  = function() { document.getElementById('wrap-next-slide').classList.remove("focus"); upcoming.Reveal.configure({ controls: false }); };
+
+                    // keydown events for container page: reroute to master
+                    // TODO understand why exactly setTimeout works
+                    // This is a hack, but it works on current versions of both Firefox and Chrome
+                    window.document.addEventListener('keydown', function(ev) { setTimeout(function() { master.document.dispatchEvent(ev); }, 0); }, false);
+                    // This should be the correct solution, but does not work on Firefox or Chrome (both need lengthier hacks, or https://github.com/termi/DOM-Keyboard-Event-Level-3-polyfill)
+                    //window.document.addEventListener('keydown', function(ev) {master.document.dispatchEvent(new KeyboardEvent('keydown', ev));}, false);
+
+                    // display timer if Reveal.Timer is enabled
+                    (function() {
+                        var timeEl = document.querySelector('.time'),
+                            elapsedEl = document.querySelector('.elapsed'),
+                            clockEl = document.getElementById('clock'),
+                            signEl =  document.getElementById('sign'),
+                            hoursEl = document.getElementById('hours'),
+                            minutesEl = document.getElementById('minutes'),
+                            secondsEl = document.getElementById('seconds');
+
+                        setInterval(function() {
+                            timeEl.style.opacity = 1;
+                            clockEl.innerHTML = (new Date()).toLocaleTimeString();
+                            if(master.Reveal.Timer) {
+                                var sign = Math.sign(master.Reveal.Timer.getTime()),
+                                    t = Math.abs(master.Reveal.Timer.getTime()),
+                                    h = Math.floor(t / (60 * 60)),
+                                    m = Math.floor((t / 60) % 60),
+                                    s = Math.floor(t % 60);
+
+                                signEl.innerHTML = sign > 0 ? "" : "-";
+                                hoursEl.innerHTML = ("00" + h).slice(-2) + ":";
+                                hoursEl.className = h !== 0 ? "" : "mute";
+                                minutesEl.innerHTML = ("00" + m).slice(-2) + ":";
+                                secondsEl.innerHTML = ("00" + s).slice(-2);
+                            } else {
+                                elapsedEl.style.display = "none";
+                            }
+                        }, 1000);
+                    })();
+
+                    // initialize
+                    syncMaster();
+                    current.Reveal.configure({ transition: 'none', controls: false, progress: false, peekFragments: true });
+                    upcoming.Reveal.configure({ transition: 'none', controls: false, progress: false, peekFragments: true });
+                    current.focus();
+
+                    // FIXME add event listeners again when master is reloaded
+                    // TODO create a SpeakerView object with control methods
+                }
+
+                (function() {
+                    console.log("Waiting for objects");
+
+                    waitForObjects([
+                        {parent: master, name: 'Reveal'},
+                        {parent: current, name: 'Reveal'},
+                        {parent: upcoming, name: 'Reveal'}], startSpeakerView);})();
+			};
+
+            window.addEventListener('load', SpeakerView, false);
+
+            // Patch Math.sign for Chrome
+            if(!Math.sign) Math.sign = function(n) {
+                if(String(Number(n)) === "NaN") return undefined;
+                return	n < 0 ? -1 : n > 0 ? 1 : 0;
+            }
+
+		</script>
+<!--		<script>
+			// In some Browsers, the KeyboardEvent constructer does not work. In this case, fall back to the old (and deprecated) 'document.createEvent' method
+			if(!(function() {
+				try {
+					return (new KeyboardEvent('keydown', {keyCode:65})).keyCode == 65;
+				} catch(e) {
+					return false;
+				}
+			})()) {
+				// works with firefox, chrome still needs chromium hack http://stackoverflow.com/a/10520017
+				// TODO test IE
+				window.KeyboardEvent = function(type, init) {
+					var that = document.createEvent('KeyboardEvent');
+					(that.initKeyboardEvent || that.initKeyEvent).call(that,
+						type,
+						init.bubbles	|| that.bubbles,
+						init.cancelable	|| that.cancelable,
+						init.view		|| that.view, // ??? -- Specifies UIEvent.view. This value may be null. -- Firefox: == window
+						init.ctrlKey	|| that.ctrlKey,
+						init.altKey		|| that.altKey,
+						init.shiftKey	|| that.shiftKey,
+						init.metaKey	|| that.metaKey,
+						init.keyCode	|| that.keyCode,
+						init.charCode	|| that.charCode
+					);
+					return that;
+				};
+				console.log("Browser does not support KeyboardEvent constructor, use own implementation");
+			}
+		</script>-->
+	</body>
 </html>
