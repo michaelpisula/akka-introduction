@@ -12,7 +12,7 @@ var RevealNotes = (function() {
 	}
 
 	// If the there's a 'notes' query set, open directly
-	if( window.location.search.match( /(\?|\&)notes/gi ) !== null ) {
+	if( window.location.search.match( /(\?|\&)notes/gi ) !== null && !window.location.search.match( /(\?|\&)receiver/gi )) {
 		openNotes();
 	}
 

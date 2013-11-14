@@ -8,7 +8,6 @@
 		<style>
 			body {
 				font-family: Helvetica;
-				background-color: black;
 			}
 
 			#notes {
@@ -24,6 +23,8 @@
 				height: 512px;
 				float: left;
 				overflow: hidden;
+
+                border: 1px solid black;
 			}
 
 			#current-slide {
@@ -50,6 +51,8 @@
 				float: left;
 				margin: 0 0 0 10px;
 				overflow: hidden;
+
+                border: 1px solid black;
 			}
 
 			#next-slide {
@@ -71,10 +74,7 @@
 			}
 			#wrap-current-slide.focus, #wrap-next-slide.focus {
 				color:red;
-				-webkit-box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
-				   -moz-box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
-					 -o-box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
-						box-shadow:	0 0 15px rgba(255, 255, 255, 0.25);
+                border: 1px solid red;
 			}
 
 			.slides {
@@ -146,13 +146,33 @@
 	</head>
 
 	<body>
+        <script>
+            // Workarounds for ugly situations
 
-		<div id="wrap-current-slide" class="slides">
-			<script>document.write( '<iframe width="1280" height="1024" id="current-slide" src="'+ window.opener.location.href +'?receiver"></iframe>' );</script>
+            // This window cannot be opened standalone
+            if (typeof window.opener === 'undefined') {
+                window.close();
+            }
+
+            // This window cannot be refreshed
+            window.onbeforeunload = function() {
+                window.close();
+            };
+
+            // When refreshing the opener window, this window is also closed
+            window.opener.onbeforeunload =  function() {
+                window.close();
+            };
+
+            window.cleanedOpenerUrl = window.opener.location.href.split('#')[0].split('?')[0];
+        </script>
+
+        <div id="wrap-current-slide" class="slides">
+			<script>document.write( '<iframe width="1280" height="1024" id="current-slide" src="'+ window.cleanedOpenerUrl +'?receiver"></iframe>' );</script>
 		</div>
 
 		<div id="wrap-next-slide" class="slides">
-			<script>document.write( '<iframe width="640" height="512" id="next-slide" src="'+ window.opener.location.href +'?receiver"></iframe>' );</script>
+			<script>document.write( '<iframe width="640" height="512" id="next-slide" src="'+ window.cleanedOpenerUrl +'?receiver"></iframe>' );</script>
 			<span>UPCOMING:</span>
 		</div>
 
@@ -171,6 +191,8 @@
 
 		<script src="../../plugin/markdown/marked.js"></script>
 		<script>
+
+
             var waitForObjects = function(objects, callbackFunction) {
                 var waitAndTest = function() {
                     var loaded = true;
@@ -251,8 +273,6 @@
                 };}
 
                 function startSpeakerView() {
-                    console.log("Waiting done");
-
                     // 1st order functions from 2nd order functions
                     var syncMaster = synchronize(master), syncCurrent = synchronize(current),
                         syncUpcoming = synchronize(upcoming);
@@ -342,12 +362,12 @@
                 }
 
                 (function() {
-                    console.log("Waiting for objects");
-
+                    // Waiting for objects when require.js is used
                     waitForObjects([
                         {parent: master, name: 'Reveal'},
                         {parent: current, name: 'Reveal'},
-                        {parent: upcoming, name: 'Reveal'}], startSpeakerView);})();
+                        {parent: upcoming, name: 'Reveal'}], startSpeakerView);
+                })();
 			};
 
             window.addEventListener('load', SpeakerView, false);
