@@ -193,11 +193,11 @@
 		<script>
 
 
-            var waitForObjects = function(objects, callbackFunction) {
+            var waitFor = function(testFunctions, callbackFunction) {
                 var waitAndTest = function() {
                     var loaded = true;
-                    for (var i = 0; i < objects.length; i++) {
-                        if (!objects[i].parent[objects[i].name]) {
+                    for (var i = 0; i < testFunctions.length; i++) {
+                        if (!testFunctions[i].apply(this)) {
                             loaded = false;
                             break;
                         }
@@ -363,10 +363,11 @@
 
                 (function() {
                     // Waiting for objects when require.js is used
-                    waitForObjects([
-                        {parent: master, name: 'Reveal'},
-                        {parent: current, name: 'Reveal'},
-                        {parent: upcoming, name: 'Reveal'}], startSpeakerView);
+                    waitFor([
+                        function() { return typeof master.Reveal !== 'undefined' && master.Reveal && master.Reveal.isReady() },
+                        function() { return typeof current.Reveal !== 'undefined' && current.Reveal && current.Reveal.isReady() },
+                        function() { return typeof upcoming.Reveal !== 'undefined' && upcoming.Reveal && upcoming.Reveal.isReady() }
+                    ], startSpeakerView);
                 })();
 			};
 
