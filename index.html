@@ -42,32 +42,33 @@
 <section data-title="Einführung">
   <section>
     <h2>Worum geht's?</h2>
-    <ul>
-      <li><a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a>-Präsentationen bei TNG einheitlicher gestalten</li>
-      <li>Hacks^H^H^H^H^HClevere Tricks verschiedener TNGler konsolidieren</li>
-      <li>Look &amp; Feel von Reveal an TNG angleichen</li>
-      <li>Vorlage für eigene Präsentationen</li>
-    </ul>
-  </section>
-  <section>
-    <h2>Was ist anders als beim normalen Reveal-Download?</h2>
-    <ol>
-      <li>Style: TNG-ähnliche Farben &amp; Schriften, Logo, weniger nervige Slide-Animationen</li>
-      <li>Auf <a href="http://requirejs.org">RequireJS</a> umgestellt, um das Reveal.js-Plumbing vom Content zu trennen
-        <div>
-          <span style="color: red">Vorsicht!</span> Dadurch kann die Präsentation nur in einem Webserver angesehen werden, z.B.
-          <pre><code class="shell">$ python -m SimpleHTTPServer 9999</code></pre>
-        </div>
-      </li>
-      <li>Zusätzliche Plugins mitgeliefert, die sich bewährt haben:
-        <ul class="no-burn">
-          <li><a href="https://github.com/theone1984/reveal-animate">Animate-Plugin</a>, um aus SVGs animierte Bilder zu erstellen</li>
-          <li><a href="https://github.com/ericweikl/revealjs-charred">Charred Trail Plugin</a>, um den aktuellen Bullet-Point hervorzuheben, oder Source-Code zu highlighten</li>
-          <li><a href="https://github.com/theone1984/reveal-sectiontitle">Section Title Plugin</a>, um optional Übersichtsseiten zu generieren</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
+      <ul>
+         <li><a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a>-Präsentationen bei TNG einheitlicher gestalten</li>
+         <li>Hacks^H^H^H^H^HClevere Tricks verschiedener TNGler konsolidieren</li>
+         <li>Look &amp; Feel von Reveal an TNG angleichen</li>
+        <li>Vorlage für eigene Präsentationen</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Was ist anders als beim normalen Reveal-Download?</h2>
+      <ol>
+        <li>Style: TNG-ähnliche Farben &amp; Schriften, Logo, Animationen</li>
+        <li>Auf <a href="http://requirejs.org">RequireJS</a> umgestellt, um das Reveal.js-Plumbing vom Content zu trennen
+          <div>
+            <span style="color: red">Vorsicht!</span> Ein Webserver ist nötig, z.B.
+            <pre><code class="shell">$ python -m SimpleHTTPServer 9999</code></pre>
+          </div>
+        </li>
+        <li>Zusätzliche Plugins mitgeliefert, die sich bewährt haben:
+          <ul class="no-burn">
+            <li><a href="https://github.com/theone1984/reveal-animate">Animate-Plugin</a>, um aus SVGs animierte Bilder zu erstellen</li>
+            <li><a href="https://github.com/ericweikl/revealjs-charred">Charred Trail Plugin</a>, um den aktuellen Bullet-Point hervorzuheben, oder Source-Code zu highlighten</li>
+            <li><a href="https://github.com/theone1984/reveal-sectiontitle">Section Title Plugin</a> für optionale Übersichtsseiten</li>
+            <li>Erweitertes Notes-Plugin für die SpeakerView-Darstellung</li>
+          </ul>
+        </li>
+      </ol>
+   </section>
 </section>
 
 <section data-title="Beispiele">
@@ -217,6 +218,30 @@ WHERE key='value';</code></pre>
       </animation>
     </div>
   </section>
+</section>
+
+<section data-title="Weitere Features">
+    <section>
+        <h2>SpeakerView</h2>
+
+        <ul style="margin-top: 30px; margin-left: 30px;">
+            <li>Zum Start der Speaker View 's' drücken</li>
+            <li>Oder '?notes' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
+            <li>In der SpeakerView sind noch nicht angezeigte Fragmente ausgegraut</li>
+            <li>In der Upcoming-Section kann man navigieren, ohne dass <br />die Hauptansicht geändert wird</li>
+            <li>Drückt man dort Enter, springt die Präsentation zur aktuell gewählten Folie</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>PDF erzeugen</h2>
+
+        <ul style="margin-top: 30px;">
+            <li>'?print-pdf' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
+            <li>Dann kann über den normalen Druckdialog gedruckt werden</li>
+            <li>Druckränder beachten!</li>
+        </ul>
+    </section>
 </section>
 
 <section data-title="Getting Started">
