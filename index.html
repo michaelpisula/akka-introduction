@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TNG Präsentationen mit Reveal.js</title><!-- FIXME -->
+    <title>Akka - Reactive Applications made easy</title>
 
-    <meta name="description" content="Der Inhalt des Vortrags"><!-- FIXME -->
-    <meta name="author" content="Thomas Endres, Michael Pisula, Eric Weikl"><!-- FIXME -->
+    <meta name="description" content="Introduction to Akka">
+    <meta name="author" content="Michael Pisula">
 
     <link rel="stylesheet" href="css/all.css" id="theme">
     <script data-main="js/main" src="js/vendor/require.js"></script>
@@ -20,264 +20,777 @@
 <body class="charred auto-fragment">
 
 <div class="i18n">
-    <!-- FIXME: hier wenn gewünscht die Überschrift der Abschnitts-Übersichtseite ändern -->
-    <span class="section-overview">Übersicht</span>
+    <span class="section-overview">Overview</span>
 </div>
 
 <!-- Titel-Slide -->
 <section>
-  <h1>Reveal.js</h1><!-- FIXME -->
-  <h3>Bei TNG verwenden</h3><!-- FIXME -->
-  <p style="padding-top:15%">
-    <a href="mailto:thomas.endres@tngtech.com">Thomas Endres</a>,<!-- FIXME -->
-    <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>,<!-- FIXME -->
-    <a href="mailto:eric.weikl@tngtech.com">Eric Weikl</a><br><!-- FIXME -->
-    Unterföhring, 2013-10-25<!-- FIXME -->
-  </p>
-  <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
+    <h1>Akka</h1><!-- FIXME -->
+    <h3>Reactive Applications made easy</h3>
+
+    <p style="padding-top:15%">
+        <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>
+        München, 2014-03-17
+    </p>
+    <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
 
 <!-- Inhalt ab hier, für eigene Präsentationen einfach löschen -->
 <!-- Gibt man data-title="foo" an, wird eine Übersichtseite mit Links hier in die Präsentation eingefügt -->
-<section data-title="Einführung">
-  <section>
-    <h2>Worum geht's?</h2>
-      <ul>
-         <li><a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a>-Präsentationen bei TNG einheitlicher gestalten</li>
-         <li>Hacks^H^H^H^H^HClevere Tricks verschiedener TNGler konsolidieren</li>
-         <li>Look &amp; Feel von Reveal an TNG angleichen</li>
-        <li>Vorlage für eigene Präsentationen</li>
-      </ul>
+<section>
+    <section>
+        <h2>What are reactive applications?</h2>
+        <blockquote cite="http://www.reactivemanifesto.org/">New requirements demand new technologies - The
+            Reactive Manifesto
+        </blockquote>
+        <div class="animated-html" style="overflow: hidden; position: relative; width: 900px; height: 600px;">
+            <animation data-duration="250">
+                <animate data-id="ani1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani2" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani3" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani4" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="500">
+                <animate data-id="ani1" data-property="top" data-value="200px"></animate>
+                <animate data-id="ani2" data-property="top" data-value="125px"></animate>
+                <animate data-id="ani3" data-property="top" data-value="125px"></animate>
+                <animate data-id="ani4" data-property="top" data-value="50px"></animate>
+                <animate data-id="ani2" data-property="left" data-value="250px"></animate>
+                <animate data-id="ani3" data-property="left" data-value="600px"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani4" data-property="opacity" data-value="0.2"></animate>
+            </animation>
+            <div id="ani1" style="position: absolute; left:400px; top:50px;opacity:0;">event-driven</div>
+            <div id="ani2" style="position: absolute; left:400px; top:90px;opacity:0;">scalable</div>
+            <div id="ani3" style="position: absolute; left:400px; top:130px;opacity:0;">resilient</div>
+            <div id="ani4" style="position: absolute; left:400px; top:170px;opacity:0;border:0px;">interactive</div>
+
+        </div>
+        <aside class="notes">
+            Reactive Manifesto by Jonas Bonér, the creator of Akka
+            new requirements are:
+            <ul>
+                <li>very low latency</li>
+                <li>ability to handle enourmous data</li>
+                <li>spread over 100s of servers</li>
+                <li>100% uptime</li>
+            </ul>
+            In Boners opinion, in order to meet these requirements, a reactive application should meet the following
+            criteria.<br>
+            Those are not hierarchical though, they build on top of each other, and event-driven is the foundation.<br>
+            Akka is event-driven, scalable and resilient. As for interactive, Play framework ties nicely into Akka.
+        </aside>
     </section>
+
     <section>
-      <h2>Was ist anders als beim normalen Reveal-Download?</h2>
-      <ol>
-        <li>Style: TNG-ähnliche Farben &amp; Schriften, Logo, Animationen</li>
-        <li>Auf <a href="http://requirejs.org">RequireJS</a> umgestellt, um das Reveal.js-Plumbing vom Content zu trennen
-          <div>
-            <span style="color: red">Vorsicht!</span> Ein Webserver ist nötig, z.B.
-            <pre><code class="shell">$ python -m SimpleHTTPServer 9999</code></pre>
-          </div>
-        </li>
-        <li>Zusätzliche Plugins mitgeliefert, die sich bewährt haben:
-          <ul class="no-burn">
-            <li><a href="https://github.com/theone1984/reveal-animate">Animate-Plugin</a>, um aus SVGs animierte Bilder zu erstellen</li>
-            <li><a href="https://github.com/ericweikl/revealjs-charred">Charred Trail Plugin</a>, um den aktuellen Bullet-Point hervorzuheben, oder Source-Code zu highlighten</li>
-            <li><a href="https://github.com/theone1984/reveal-sectiontitle">Section Title Plugin</a> für optionale Übersichtsseiten</li>
-            <li>Erweitertes Notes-Plugin für die SpeakerView-Darstellung</li>
-          </ul>
-        </li>
-      </ol>
-   </section>
-</section>
+        <h2>What is Akka?</h2>
 
-<section data-title="Beispiele">
-  <section>
-    <h1>Einfache Elemente</h1>
-  </section>
+        <p>
 
-  <section>
-    <h2>Dies ist eine Überschrift</h2>
+        <div class="animated-html" style="overflow: hidden; position: relative; width: 900px; height: 600px;">
+            <animation data-duration="250">
+                <animate data-id="ani1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani2" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani3" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation data-duration="500">
+                <animate data-id="ani1" data-property="left" data-value="100px"></animate>
+                <animate data-id="ani2" data-property="left" data-value="100px"></animate>
+                <animate data-id="ani3" data-property="left" data-value="100px"></animate>
+                <animate data-id="ani4" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <div id="ani1" style="position: absolute; left:300px; top:50px;opacity:0;">actor programming model</div>
+            <div id="ani2" style="position: absolute; left:300px; top:90px;opacity:0;">+ fault tolerance</div>
+            <div id="ani3" style="position: absolute; left:300px; top:130px;opacity:0;">+ location transparency</div>
+            <div id="ani4" style="position: absolute; left:550px; top:0px;opacity:0;"><img src="img/happy2.jpg"/></div>
 
-    <p style="margin-top: 50px;">Ein Element in der Präsentation</p>
-    <p class="not-printed" style="margin-top: 30px;">Dieses Element wird in der Druckansicht nicht angezeigt</p>
-    <p style="margin-top: 30px;">Dieses Element wird dagegen wieder gedruckt</p>
-  </section>
+        </div>
+        </p>
+        <aside class="notes">
+            <ul>
+                <li>akka takes the actor programming model</li>
+                <li>adds the let it crash principle to add fault tolerance</li>
+                <li>puts easy location transparency on top of that</li>
+                <li>and just makes you happy</li>
+                <li>aims to ease development of concurrent software</li>
+                <li>developers can concentrate on business logic</li>
+                <li>concerns like fault tolerance, remoting are separated from business logic</li>
+            </ul>
+        </aside>
+    </section>
 
-  <section>
-    <h2>Präsentation in HTML</h2>
-    <h3>Level-3-Überschrift</h3>
-
-    <p>Dieser Text wurde in HTML geschrieben</p>
-    <ul class="no-burn">
-      <li>Listenpunkt 1</li>
-      <li>Listenpunkt 2</li>
-    </ul>
-
-    <pre><code class="sql">-- Code kann auch geschrieben werden
-SELECT *
-FROM Table
-WHERE key='value';</code></pre>
-  </section>
-
-  <section data-markdown>
-    <script type="text/template">
-      ## Präsentation in Markdown
-      ### Level-3-Überschrift
-
-      Dieser Text wurde in Markdown geschrieben
-
-      * Listenpunkt 1
-      * Listenpunkt 2
-
-      ```sql
-      -- Code kann auch geschrieben werden
-      SELECT *
-      FROM Table
-      WHERE key='value';
-      ```
-    </script>
-  </section>
-
-  <section>
-    <h1>Bullet Points</h1>
-    <h4 class="fragment">(bitte sparsam verwenden ;-))</h4>
-  </section>
-
-  <section>
-    <h2>Bullet Points</h2>
-    <h3>Standardverhalten</h3>
-    <ul>
-      <li>Standardmäßig...</li>
-      <li>...werden Punkte nach und nach eingeblendet...</li>
-      <li data-fragment-index="4">...die Reihenfolge ist konfigurierbar</li>
-      <li>...wobei alte Elemente verblassen...</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Bullet Points</h2>
-    <h3>(statisch)</h3>
-    <ul class="no-burn">
-      <li>Diese Elemente...</li>
-      <li>...sind immer sichtbar</li>
-    </ul>
-    <hr>
-    <ul>
-      <li class="no-burn">Diese Elemente...</li>
-      <li class="no-burn">...verblassen nie</li>
-      <li class="no-burn">egal wie viele kommen</li>
-      <li class="no-burn">Beides wird über CSS-Klassen gesteuert</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Überblick</h2>
-
-    <p>Alle Sections auf oberster Ebene, <br/>die ein Attribut, "data-title" besitzen:</p>
-    <ul>
-      <li>Erhalten eine Übersichtsseite (wo stehen wir gerade?)</li>
-      <li>Werden mit ihrem Titel auf der Übersichtsseite angezeigt</li>
-    </ul>
-  </section>
-
-  <section>
-    <h1>Source Code Focus</h1>
-  </section>
-
-  <section>
-    <p>Bei Source-Code Beispielen kann man die Stelle, über die man gerade spricht, fokussieren:</p>
-    <pre><code class="java" data-noescape>
-      public ^1^class^^ HelloWorld {
-        public static ^4^void^^ ^2^main^^(^3^String[] args^^) {
-          ^5^System.out.println("Hello World!");^^
-        }
-      }</code></pre>
-        </section>
-
-  <section>
-    <h1>Animationen</h1>
-  </section>
-
-  <section>
-    <h2>Animierte Elemente</h2>
-
-    <div class="animated-html" style="height: 600px;">
-      <animation data-duration="500">
-        <animate data-id="box" data-property="opacity" data-value="1"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="box" data-property="top" data-value="400px"></animate>
-        <animate data-id="box" data-property="left" data-value="400px"></animate>
-      </animation>
-
-      <div id="box" style="position: absolute; left: 200px; top: 200px; width: 400px; border: 1px solid black; opacity: 0;">
-        Dieser Text wird sich bewegen
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Animierte Elemente</h2>
-    <p>SVG</p>
-
-    <div class="svg animated-svg" src="img/test/tng.svg" style="margin-left: 320px; margin-top: 30px; width: 400px; height: 200px;">
-      <initial>
-        <state data-id="TNG" data-property="opacity" data-value="0"></state>
-        <state data-id="technology-consulting" data-property="opacity" data-value="0"></state>
-      </initial>
-      <animation data-duration="500">
-        <animate data-id="TNG" data-property="opacity" data-value="1"></animate>
-        <animate data-id="technology-consulting" data-property="opacity" data-value="1"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="TNG" data-property="transform" data-value="translate(-114, 63)"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="technology-consulting" data-property="transform" data-value="translate(113, -66)"></animate>
-      </animation>
-    </div>
-  </section>
-</section>
-
-<section data-title="Weitere Features">
     <section>
-        <h2>SpeakerView</h2>
-
-        <ul style="margin-top: 30px; margin-left: 30px;">
-            <li>Zum Start der Speaker View 's' drücken</li>
-            <li>Oder '?notes' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
-            <li>In der SpeakerView sind noch nicht angezeigte Fragmente ausgegraut</li>
-            <li>In der Upcoming-Section kann man navigieren, ohne dass <br />die Hauptansicht geändert wird</li>
-            <li>Drückt man dort Enter, springt die Präsentation zur aktuell gewählten Folie</li>
+        <h2>Usage</h2>
+        <ul>
+            <li>web applications (in combination with play)</li>
+            <li>batch processing</li>
+            <li>system integration (in combination with camel)</li>
+            <li>distributed computing</li>
+            <li>really anywhere you would use a JVM...</li>
         </ul>
+        <aside class="notes">
+            <ul>
+                <li>each actor has a responsibility</li>
+                <li>to get an actor to do something send a message</li>
+                <li>try to keep it simple, most messages should be fire-and-forget</li>
+            </ul>
+        </aside>
     </section>
 
-    <section>
-        <h2>PDF erzeugen</h2>
-
-        <ul style="margin-top: 30px;">
-            <li>'?print-pdf' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
-            <li>Dann kann über den normalen Druckdialog gedruckt werden</li>
-            <li>Druckränder beachten!</li>
-        </ul>
-    </section>
-</section>
-
-<section data-title="Getting Started">
-  <section>
-    <h2>Wie erzeuge ich meine Präsentation?</h2>
-    <ol>
-      <li>Bei <a href="mailto:thomas.endres@tngtech.com">Thomas Endres</a> melden,
-          um Leserechte für das <a href="https://git.tngtech.com/reveal-template">Git-Repository</a> zu holen</li>
-      <li>Vorlage auschecken:
-          <pre><code class="bash">$ git clone gitolite@git.tngtech.com:reveal-template.git</code></pre></li>
-      <li>index.html ansehen und anpassen</li>
-      <li><b>Nicht</b> versuchen, in das Repo zurückzupushen ;-) Am besten legt Ihr Euch ein eigenes Repo für Eure Präsentation an.</li>
-    </ol>
-  </section>
 </section>
 
 <section>
-  <h1>Danke-Slide</h1>
-  <h2>Abschluß und Kontaktdaten</h2>
+    <section>
+        <h2>Actors</h2>
+        <img src="img/actors.png"/>
+        <aside class="notes">
+            actors are main building blocks,
+            they:
+            <ul>
+                <li>Introduced 1973 by Carl Hewitt</li>
+                <li>encapsulate business logic</li>
+                <li>can hold state</li>
+                <li>only can be used by sending messages</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Creating an Actor is easy</h2>
+
+        <pre><code data-noescape>
+class Adder extends ^1^UntypedActor^^ {
+
+    private int sum = 0;
+
+    @Override
+    public void ^2^onReceive^^(Object message) throws Exception {
+        if (message instanceof Add) {
+            sum += ((Add)message).value;
+        } else if (message instanceof GetSum) {
+            getSender().tell(new Sum(sum), getSelf());
+        }
+    }
+
+
+}
+        </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>you need a subclass of Actor</li>
+                <li>overwrite receive</li>
+                <li>write code for your message types</li>
+                <li>send response to sender</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Working with Actors</h2>
+
+
+    <pre><code data-noescape>
+ActorSystem system = ^1^ActorSystem^^.create("AdderSystem");
+ActorRef add = system.^2^actorOf^^(^4^Props^^.create(Adder.class));
+add.^3^tell^^(new Add(1), null);
+    </code></pre>
+
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Adder.java"
+           target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>first you need to create an actor system</li>
+                <li>create actor using actorOf</li>
+                <li>use tell to send your message</li>
+                <li>Actors are more lightweight than threads</li>
+                <li>you can create tons of actors</li>
+                <li>actors should work through their messages very fast, avoid blocking if possible</li>
+                <li>no direct method calls on actors</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Props</h2>
+    <pre><code data-noescape>
+        Props props1 = ^1^Props.create(SimpleCalc.class)^^;
+        Props props2 = ^2^Props.create(SimpleCalc.class, 5)^^;
+    </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>In order to be able to restart actors, reproducible way to create actors is needed</li>
+                <li>Props with the wanted type are used</li>
+                <li>Props can be given arguments to use when creating actors with non-default constructor</li>
+                <li>Props are stored, and can be used to recreate actor</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Props</h2>
+
+        <div class="fragment no-burn" data-fragment-index="0">Best practice:
+    <pre><code data-noescape>
+public static class Adder extends UntypedActor {
+
+    public static Props create(int initialValue) {
+        return Props.create(Adder.class, initialValue);
+    }
+
+    public Adder(int initialValue) {
+        ...
+    }
+
+}
+...
+system.actorOf(Adder.create(42));
+    </code></pre>
+        </div>
+        <aside class="notes">
+            <ul>
+                <li>Recommended to have a static factory method for props</li>
+                <li>Better to deal with changes, e.g. new arguments</li>
+                <li>Integration with Dependency Injection also possible, some work necessary</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Inside an Actor</h2>
+
+        <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
+            <initial>
+                <state data-id="arrow1" data-property="opacity" data-value="0"></state>
+                <state data-id="arrow2" data-property="opacity" data-value="0"></state>
+                <state data-id="arrow3" data-property="opacity" data-value="0"></state>
+                <state data-id="instance" data-property="opacity" data-value="0"></state>
+                <state data-id="instance2" data-property="opacity" data-value="0"></state>
+                <state data-id="x" data-property="opacity" data-value="0"></state>
+                <state data-id="mailbox" data-property="opacity" data-value="0"></state>
+                <state data-id="ref" data-property="opacity" data-value="0"></state>
+                <state data-id="incarnation" data-property="opacity" data-value="0"></state>
+                <state data-id="text2" data-property="opacity" data-value="0"></state>
+            </initial>
+            <animation duration="500">
+                <animate data-id="mailbox" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="incarnation" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="ref" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="text2" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="x" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance" data-property="opacity" data-value="0"></animate>
+                <animate data-id="x" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance2" data-property="opacity" data-value="1"></animate>
+                <animate data-id="instance2" data-property="transform" data-value="translate(0,0)"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+            </animation>
+        </div>
+        <aside class="notes">
+            <ul>
+                <li>as seen in the last example actorOf returns ActorRef, not the Actor</li>
+                <li>mailbox should be independent of instance</li>
+                <li>incarnation encapsulates mailbox and instance</li>
+                <li>actor ref references incarnation</li>
+                <li>ref can be obtained by creating or searching by path</li>
+                <li>instance can be replaced when crashed without losing mailbox or ref</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Resilience</h2>
+        <img src="img/supervision.jpg"/>
+
+        <aside class="notes">
+            <ul>
+                <li>the basis of resilience in akka is "let it crash", errors are not handled in business logic</li>
+                <li>as on the sign, in akka parents supervise their children</li>
+                <li>if a child throws an exception the parent will decide how to continue</li>
+                <li>in combination with hierarchies this allows to take actions for a whole group of actors</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Creating a hierarchy is easy</h2>
+
+    <pre><code data-noescape>
+// top-level actor
+^1^system^^.actorOf(Props.create(Adder.class));
+// child actor
+^2^getContext()^^.actorOf(Props.create(Adder.class));
+    </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>to create a hierarchy you need children instead of top level actors</li>
+                <li>every actor can create new children on its context</li>
+                <li>children have a ref to their parent</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>The Akka Hierarchy</h2>
+
+    </section>
+    <section>
+        <h2>Supervision strategies</h2>
+        <ul>
+            <li class="fragment">One For One</li>
+            <li class="fragment">All For One</li>
+        </ul>
+        <aside class="notes">
+            <ul>
+                <li>there are predefined strategies</li>
+                <li>one for one will only act on the child that threw the exception</li>
+                <li>all for one will act on all children if one throws an exception</li>
+                <li>good for undisciplined children</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Supervision options</h2>
+        <ul>
+            <li class="fragment">Resume</li>
+            <li class="fragment">Restart</li>
+            <li class="fragment">Stop</li>
+            <li class="fragment">Escalate</li>
+        </ul>
+        <aside class="notes">
+            <ul>
+                <li>you can ignore exceptions, and continue with the next message</li>
+                <li>you can restart the actor, if the actor has state it will be lost</li>
+                <li>you can stop the actor, if recovery is not possible</li>
+                <li>you can escalate the problem to your parent</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Defining supervision is easy</h2>
+
+    <pre><code data-noescape>
+    private SupervisorStrategy strategy =
+        new OneForOneStrategy(10, Duration.create(5, TimeUnit.SECONDS),
+            new Function() {
+                @Override
+                public Directive apply(Throwable t) throws Exception {
+                    return SupervisorStrategy.resume();
+                }
+            });
+    @Override
+    public SupervisorStrategy supervisorStrategy() {
+        return strategy;
+    }
+    </code></pre>
+        <a class="fragment"
+           href="http://localhost:8888/app/hello-akka/#code/app/com/tngtech/akka/supervision/Adder.scala"
+           target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>if you override supervisorStrategy it will be used for all your children</li>
+                <li>default strategy is to restart for all exceptions and escalate on all errors</li>
+                <li>you can of course define your own custom supervision strategy</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Remoting</h2>
+        <img src="img/cluster2.jpg"/>
+        <aside class="notes">
+            <ul>
+                <li>remoting is completely driven by configuration</li>
+                <li>you need to keep in mind certain facts</li>
+                <li>Messages must be Serializable</li>
+                <li>No shared state across nodes</li>
+                <li>if you do, switching remoting on and off will be very simple</li>
+                <li>as it is only configuration you can keep a local config (for testing) and a remote config for
+                    production
+                </li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Configure the node first</h2>
+
+    <pre><code data-noescape>
+    akka {
+        actor {
+            provider = "akka.remote.RemoteActorRefProvider"
+        }
+        remote {
+            enabled-transports = ["akka.remote.netty.tcp"]
+            netty.tcp {
+                hostname = "127.0.0.1"
+                port = 2552
+            }
+        }
+    }
+    </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>first you need to add configuration to enable remoting on your actor system</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Remoting actors now is easy</h2>
+
+     <pre><code data-noescape>
+     akka {
+         actor {
+             deployment {
+                 /echoActor {
+                    remote = "akka.tcp://remoteSystem@127.0.0.1:2553"
+                 }
+             }
+         }
+     }
+     </code></pre>
+        <a class="fragment"
+           href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Echo.java"
+           target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>then you can simply configure for each actor on which node to create if</li>
+                <li>the rest is done in the actorOf method</li>
+                <li>you can also define remoting programmatically for more dynamic remoting</li>
+                <li>combining remoting with routing can be powerful</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Clustering</h2>
+
+    <pre><code data-noescape>
+        akka {
+            actor {
+                provider = "^1^akka.cluster.ClusterActorRefProvider^^"
+            }
+            remote {
+                ...
+            }
+            cluster {
+                ^2^seed-nodes^^ = [
+                    "akka.tcp://ClusterSystem@127.0.0.1:2551",
+                    "akka.tcp://ClusterSystem@127.0.0.1:2552"]
+
+                auto-down-unreachable-after = 10s
+            }
+        }
+    </code></pre>
+        <a class="fragment"
+           href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/ClusterEcho.java"
+           target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>Remoting good when you need a fixed number of machines to talk</li>
+                <li>This does not scale that well</li>
+                <li>Akka Cluster based Dynamo/Riak approach to cluster management</li>
+                <li>You create seed nodes, and then add new nodes as needed</li>
+                <li>Can get big, test on Google Compute Engine, 2400 Nodes max, 1000 Nodes in 4 Minutes</li>
+                <li>This was 2.2, lessons learned were incorporated into 2.3</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Camel Integration</h2>
+        <img src="img/camel.jpg"/>
+        <aside class="notes">
+            <ul>
+                <li>akka has extensions which can add functionalities</li>
+                <li>one of this extensions is camel</li>
+                <li>it allows you to use all the power of camel components for your application</li>
+                <li>adds producer and consumer endpoints to interact with endpoints</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Greeting Web Service</h2>
+
+    <pre><code data-noescape>
+    public class GreetingService extends ^1^UntypedConsumerActor^^ {
+
+        @Override
+        public void onReceive(Object message) throws Exception {
+            if (message instanceof ^3^CamelMessage^^) {
+                CamelMessage camelMsg = (CamelMessage) message;
+                Map headers = camelMsg.getHeaders();
+                getSender().tell("Hello " + headers.get("greetee"), getSelf());
+            }
+        }
+
+        @Override
+        public String ^2^getEndpointUri^^() {
+            return "jetty:http://localhost:4242/greet";
+        }
+    }
+    </code></pre>
+        <a class="fragment" href="http://localhost:4242/greet?greetee=JUGM" target="camel">Example</a>
+        <aside class="notes">
+            <ul>
+                <li>for a simple web service you simply create a subclass of Consumer</li>
+                <li>override the endpointUri</li>
+                <li>override the receive method to receive CamelMessage type</li>
+                <li>send response to sender as a CamelMessage (or as string)</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <img src="img/easy2.jpg"/>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Testing</h2>
+        <img src="img/test.jpg"/>
+        <aside class="notes">
+            <ul>
+                <li>Testkit provides ways to test and inspect actors</li>
+                <li>JavaTestKit can be used to mock Actors</li>
+                <li>TestActorRef can be used to access fields and methods of the tested actor</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Testing with scalatest</h2>
+
+    <pre><code data-noescape>
+    class AdderSpec extends TestKit with ImplicitSender with WordSpec ... {
+        ...
+          "An Adder actor" must {
+
+            "return 3 as sum of 1 and 2" in {
+              val greeter = system.actorOf(Props[Adder])
+              greeter ! new Add(1)
+              greeter ! new Add(2)
+              greeter ! new GetSum()
+              expectMsg(new Sum(3))
+            }
+          }
+    }
+    </code></pre>
+
+        <aside class="notes">
+            <ul>
+                <li>if you test with scalatest you can just extend TestKit and mix in some traits</li>
+                <li>write your specs</li>
+                <li>the testkit (implicit sender) will allow you to send and receive messages without overhead</li>
+                <li>testkit provides expect* method to check the response messages</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Testing with JUnit</h2>
+
+    <pre><code data-noescape>
+    @Test
+    public void add2to1() {
+        ActorRef adder = system.actorOf(Props.create(Adder.class));
+        JavaTestKit probe = new JavaTestKit(system);
+        adder.tell(new Adder.Add(1), probe.getRef());
+        adder.tell(new Adder.Add(2), probe.getRef());
+        adder.tell(new Adder.GetSum(), probe.getRef());
+
+        probe.expectMsgEquals(new Adder.Sum(3));
+    }
+    </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>if you use junit you can still work fine</li>
+                <li>you can also just use java</li>
+                <li>using a javatestkit you can send and receive messages</li>
+                <li>javatestkit can be used as a actor mock and injected into your actors</li>
+                <li>javatestkit has an autopilot you can use to send responses back</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>TestActorRef</h2>
+
+    <pre><code data-noescape>
+    "An Adder actor" must {
+        "know the Answer to the Ultimate Question of Life, the Universe, and Everything" in {
+          val greeter = TestActorRef[Adder]
+          greeter.underlyingActor.sum = 42
+          greeter ! new GetSum()
+          expectMsg(new Sum(42))
+        }
+    }
+    </code></pre>
+
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#test" target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>if you need to access your actor for testing you can use testactorref</li>
+                <li>using underlying actor you can access fields and methods of your actor</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Persistence</h2>
+        <img src=""/>
+        <aside class="notes">
+            <ul>
+                <li>Introduced with Akka 2.3 (release 6th March)</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>What is Akka persistence about?</h2>
+
+        <ul>
+            <li>Journaling messages</li>
+            <li>Persist actor state</li>
+            <li>At-Least-One Message Delivery</li>
+            <li>Replay after JVM crash</li>
+            <li></li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Persisting state</h2>
+        <pre><code>
+        public class PersistentAdder extends UntypedProcessor {
+            private int sum = 0;
+
+            @Override
+            public void onReceive(Object message) throws Exception {
+                if (message instanceof Persistent) {
+                    Object payload = ((Persistent) message).payload();
+                    if (payload instanceof Add) {
+                        sum += Integer.parseInt(((Add) payload).value);
+                    }
+                }
+            }
+        }
+        </code></pre>
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/PersistentAdder.java"
+           target="activator">Code</a>
+    </section>
+
+    <section>
+        <h2>Guaranteed delivery</h2>
+            <pre><code data-noescape>
+            public void onReceive(Object message){
+                if (message instanceof ConfirmablePersistent) {
+                    ((ConfirmablePersistent) message).confirm();
+                    getSender().tell(((ConfirmablePersistent) message).payload(), getSelf());
+                }
+            }
+            ...
+            ActorRef channel = system.actorOf(Channel.props());
+            channel.tell(Deliver.create(Persistent.create("Hello Echo!"), echoActor.path()), inbox.getRef());
+            </code></pre>
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/GuaranteedEcho.java"
+           target="activator">Code</a>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Akka und Java 8</h2>
+    </section>
+
+    <section>
+        <h2>Lambdafy your Actor</h2>
+        <pre><code>
+        public class MyActor extends AbstractActor {
+
+          @Override
+          public PartialFunction<Object, BoxedUnit> receive() {
+            return ReceiveBuilder.
+              match(String.class, s -> {
+                log.info("Received String message: {}", s);
+              }).
+              matchAny(o -> log.info("received unknown message")).build();
+          }
+        }
+        </code></pre>
+        <aside class="notes">
+            <ul>
+                <li>Introduced with Akka 2.3 (release 6th March)</li>
+                <li>Performance may be worse than using Scala or UntypedActor</li>
+            </ul>
+        </aside>
+    </section>
 </section>
 
 <!-- Danke Slide -->
 <section>
-  <h1>Vielen Dank!</h1>
-  <h2 class="fragment">Fragen?</h2>
-  <div>
-    <img style="height: 200px" src="img/test/ThomasEndres.jpg">
-    <img style="height: 200px" src="img/test/EricWeikl.jpg">
-    <img style="height: 200px" src="img/test/MichaelPisula.png">
-  </div>
-  <p>
-    <a href="mailto:john.doe@tngtech.com">john.doe@tngtech.com</a><br>
-    <a href="https://www.xing.com/profile/John_Doe/">https://www.xing.com/profile/John_Doe</a><br>
-    <a href="http://www.twitter.com/johndoe">@johndoe</a>
-  </p>
-  <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
+    <h1>Thank you!</h1>
+
+    <h2 class="fragment">Questions?</h2>
+
+    <p>
+        <a href="mailto:michael.pisula@tngtech.com">michael.pisula@tngtech.com</a><br>
+        <a href="https://www.xing.com/profile/Michael_Pisula/">https://www.xing.com/profile/Michael_Pisula</a><br>
+        <a href="http://www.twitter.com/MichaelPisula">@MichaelPisula</a>
+    </p>
+    <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
 
 </body>

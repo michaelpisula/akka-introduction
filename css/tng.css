@@ -4,10 +4,9 @@
  * Based on the simple theme Copyright (C) 2012 Owen Versteeg, https://github.com/StereotypicalApps. It is MIT licensed.
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
-
 @import url(reveal.min.css);
 @import url(print/pdf.css) print;
-    /* syntax highlighting */
+/* syntax highlighting */
 @import url(github.css);
 
 @font-face {
@@ -64,14 +63,13 @@ body.charred .reveal .slides section .fragment.visible.focus {
 }
 
 body.charred .reveal .slides section .fragment.highlight {
-  opacity: 1;
+    opacity: 1;
 }
 
 body.charred .reveal .slides section .fragment.highlight.focus {
-  background-color: yellow;
-  -webkit-border-radius: 4px;
+    background-color: yellow;
+    -webkit-border-radius: 4px;
 }
-
 
 .reveal ul {
     list-style-type: square;
@@ -295,17 +293,3 @@ body {
     display: none;
 }
 
-.reveal>.slides section .title, .reveal>.slides section .selected-title {
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-    border-radius: 5px;
-}
-
-.reveal>.slides section .title {
-    background-color: #e3e3e3;
-}
-
-.reveal>.slides section .selected-title {
-    background-color: #bbbbbb;
-}
