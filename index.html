@@ -25,7 +25,8 @@
 
 <!-- Titel-Slide -->
 <section>
-    <h1>Akka</h1><!-- FIXME -->
+    <h1>Akka</h1>
+
     <h3>Reactive Applications made easy</h3>
 
     <p style="padding-top:15%">
@@ -113,7 +114,9 @@
             <div id="ani1" style="position: absolute; left:300px; top:50px;opacity:0;">actor programming model</div>
             <div id="ani2" style="position: absolute; left:300px; top:90px;opacity:0;">+ fault tolerance</div>
             <div id="ani3" style="position: absolute; left:300px; top:130px;opacity:0;">+ location transparency</div>
-            <div id="ani4" style="position: absolute; left:550px; top:0px;opacity:0;"><img src="img/happy2.jpg"/></div>
+            <div id="ani4" style="position: absolute; left:550px; top:0px;opacity:0;"><img src="img/happy.jpg"/><a
+                    class="attribution" href="http://www.flickr.com/photos/geishaboy500/2105396244/">Happy by THOR</a>
+            </div>
 
         </div>
         </p>
@@ -151,23 +154,29 @@
 </section>
 
 <section>
-    <section>
-        <h2>Actors</h2>
-        <img src="img/actors.png"/>
-        <aside class="notes">
-            actors are main building blocks,
-            they:
-            <ul>
-                <li>Introduced 1973 by Carl Hewitt</li>
-                <li>encapsulate business logic</li>
-                <li>can hold state</li>
-                <li>only can be used by sending messages</li>
-            </ul>
-        </aside>
-    </section>
+<section>
+    <h2>Actors</h2>
 
-    <section>
-        <h2>Creating an Actor is easy</h2>
+
+    <img src="img/actor.jpg"/>
+
+    <a class="attribution" href="http://www.flickr.com/photos/gnuckx/4816756390/">Venetian Carnival Mask - Creative
+        Commons by
+        gnuckx</a>
+    <aside class="notes">
+        actors are main building blocks,
+        they:
+        <ul>
+            <li>Introduced 1973 by Carl Hewitt</li>
+            <li>encapsulate business logic</li>
+            <li>can hold state</li>
+            <li>only can be used by sending messages</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Creating an Actor is easy</h2>
 
         <pre><code data-noescape>
 class Adder extends ^1^UntypedActor^^ {
@@ -186,64 +195,64 @@ class Adder extends ^1^UntypedActor^^ {
 
 }
         </code></pre>
-        <aside class="notes">
-            <ul>
-                <li>you need a subclass of Actor</li>
-                <li>overwrite receive</li>
-                <li>write code for your message types</li>
-                <li>send response to sender</li>
-            </ul>
-        </aside>
-    </section>
+    <aside class="notes">
+        <ul>
+            <li>you need a subclass of Actor</li>
+            <li>overwrite receive</li>
+            <li>write code for your message types</li>
+            <li>send response to sender</li>
+        </ul>
+    </aside>
+</section>
 
-    <section>
-        <h2>Working with Actors</h2>
+<section>
+    <h2>Working with Actors</h2>
 
 
     <pre><code data-noescape>
 ActorSystem system = ^1^ActorSystem^^.create("AdderSystem");
-ActorRef add = system.^2^actorOf^^(^4^Props^^.create(Adder.class));
-add.^3^tell^^(new Add(1), null);
+ActorRef add = system.^2^actorOf^^(^3^Props^^.create(Adder.class));
+add.^4^tell^^(new Add(1), null);
     </code></pre>
 
-        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Adder.java"
-           target="activator">Code</a>
-        <aside class="notes">
-            <ul>
-                <li>first you need to create an actor system</li>
-                <li>create actor using actorOf</li>
-                <li>use tell to send your message</li>
-                <li>Actors are more lightweight than threads</li>
-                <li>you can create tons of actors</li>
-                <li>actors should work through their messages very fast, avoid blocking if possible</li>
-                <li>no direct method calls on actors</li>
-            </ul>
-        </aside>
-    </section>
+    <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Adder.java"
+       target="activator">Code</a>
+    <aside class="notes">
+        <ul>
+            <li>first you need to create an actor system</li>
+            <li>create actor using actorOf</li>
+            <li>use tell to send your message</li>
+            <li>Actors are more lightweight than threads</li>
+            <li>you can create tons of actors</li>
+            <li>actors should work through their messages very fast, avoid blocking if possible</li>
+            <li>no direct method calls on actors</li>
+        </ul>
+    </aside>
+</section>
 
-    <section>
-        <h2>Props</h2>
+<section>
+    <h2>Props</h2>
     <pre><code data-noescape>
         Props props1 = ^1^Props.create(SimpleCalc.class)^^;
         Props props2 = ^2^Props.create(SimpleCalc.class, 5)^^;
     </code></pre>
-        <aside class="notes">
-            <ul>
-                <li>In order to be able to restart actors, reproducible way to create actors is needed</li>
-                <li>Props with the wanted type are used</li>
-                <li>Props can be given arguments to use when creating actors with non-default constructor</li>
-                <li>Props are stored, and can be used to recreate actor</li>
-            </ul>
-        </aside>
-    </section>
-    <section>
-        <h2>Props</h2>
+    <aside class="notes">
+        <ul>
+            <li>In order to be able to restart actors, reproducible way to create actors is needed</li>
+            <li>Props with the wanted type are used</li>
+            <li>Props can be given arguments to use when creating actors with non-default constructor</li>
+            <li>Props are stored, and can be used to recreate actor</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>Props</h2>
 
-        <div class="fragment no-burn" data-fragment-index="0">Best practice:
+    <div class="fragment no-burn" data-fragment-index="0">Best practice:
     <pre><code data-noescape>
 public static class Adder extends UntypedActor {
 
-    public static Props create(int initialValue) {
+    public static Props props(int initialValue) {
         return Props.create(Adder.class, initialValue);
     }
 
@@ -253,108 +262,109 @@ public static class Adder extends UntypedActor {
 
 }
 ...
-system.actorOf(Adder.create(42));
+system.actorOf(Adder.props(42));
     </code></pre>
-        </div>
-        <aside class="notes">
-            <ul>
-                <li>Recommended to have a static factory method for props</li>
-                <li>Better to deal with changes, e.g. new arguments</li>
-                <li>Integration with Dependency Injection also possible, some work necessary</li>
-            </ul>
-        </aside>
-    </section>
-    <section>
-        <h2>Inside an Actor</h2>
+    </div>
+    <aside class="notes">
+        <ul>
+            <li>Recommended to have a static factory method for props</li>
+            <li>Better to deal with changes, e.g. new arguments</li>
+            <li>Integration with Dependency Injection also possible, some work necessary</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>Inside an Actor</h2>
 
-        <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
-            <initial>
-                <state data-id="arrow1" data-property="opacity" data-value="0"></state>
-                <state data-id="arrow2" data-property="opacity" data-value="0"></state>
-                <state data-id="arrow3" data-property="opacity" data-value="0"></state>
-                <state data-id="instance" data-property="opacity" data-value="0"></state>
-                <state data-id="instance2" data-property="opacity" data-value="0"></state>
-                <state data-id="x" data-property="opacity" data-value="0"></state>
-                <state data-id="mailbox" data-property="opacity" data-value="0"></state>
-                <state data-id="ref" data-property="opacity" data-value="0"></state>
-                <state data-id="incarnation" data-property="opacity" data-value="0"></state>
-                <state data-id="text2" data-property="opacity" data-value="0"></state>
-            </initial>
-            <animation duration="500">
-                <animate data-id="mailbox" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="incarnation" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="ref" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="text2" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="instance" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
-                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
-                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="x" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="instance" data-property="opacity" data-value="0"></animate>
-                <animate data-id="x" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
-                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="instance2" data-property="opacity" data-value="1"></animate>
-                <animate data-id="instance2" data-property="transform" data-value="translate(0,0)"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
-            </animation>
-            <animation duration="500">
-                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
-            </animation>
-        </div>
-        <aside class="notes">
-            <ul>
-                <li>as seen in the last example actorOf returns ActorRef, not the Actor</li>
-                <li>mailbox should be independent of instance</li>
-                <li>incarnation encapsulates mailbox and instance</li>
-                <li>actor ref references incarnation</li>
-                <li>ref can be obtained by creating or searching by path</li>
-                <li>instance can be replaced when crashed without losing mailbox or ref</li>
-            </ul>
-        </aside>
-    </section>
+    <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
+        <initial>
+            <state data-id="arrow1" data-property="opacity" data-value="0"></state>
+            <state data-id="arrow2" data-property="opacity" data-value="0"></state>
+            <state data-id="arrow3" data-property="opacity" data-value="0"></state>
+            <state data-id="instance" data-property="opacity" data-value="0"></state>
+            <state data-id="instance2" data-property="opacity" data-value="0"></state>
+            <state data-id="x" data-property="opacity" data-value="0"></state>
+            <state data-id="mailbox" data-property="opacity" data-value="0"></state>
+            <state data-id="ref" data-property="opacity" data-value="0"></state>
+            <state data-id="incarnation" data-property="opacity" data-value="0"></state>
+            <state data-id="text2" data-property="opacity" data-value="0"></state>
+        </initial>
+        <animation duration="500">
+            <animate data-id="mailbox" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="incarnation" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="ref" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="text2" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="instance" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+            <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+            <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="x" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="instance" data-property="opacity" data-value="0"></animate>
+            <animate data-id="x" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+            <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="instance2" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="instance2" data-property="transform" data-value="translate(0,0)"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+        </animation>
+        <animation duration="500">
+            <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+        </animation>
+    </div>
+    <aside class="notes">
+        <ul>
+            <li>as seen in the last example actorOf returns ActorRef, not the Actor</li>
+            <li>mailbox should be independent of instance</li>
+            <li>incarnation encapsulates mailbox and instance</li>
+            <li>actor ref references incarnation</li>
+            <li>ref can be obtained by creating or searching by path</li>
+            <li>instance can be replaced when crashed without losing mailbox or ref</li>
+        </ul>
+    </aside>
+</section>
 </section>
 
 <section>
     <section>
         <h2>Resilience</h2>
-        <img src="img/supervision.jpg"/>
-
+        <img src="img/supervision.jpg" width="400"/>
         <aside class="notes">
             <ul>
                 <li>the basis of resilience in akka is "let it crash", errors are not handled in business logic</li>
@@ -383,7 +393,7 @@ system.actorOf(Adder.create(42));
     </section>
     <section>
         <h2>The Akka Hierarchy</h2>
-
+        <img src="img/guardians.png"/>
     </section>
     <section>
         <h2>Supervision strategies</h2>
@@ -423,15 +433,15 @@ system.actorOf(Adder.create(42));
 
     <pre><code data-noescape>
     private SupervisorStrategy strategy =
-        new OneForOneStrategy(10, Duration.create(5, TimeUnit.SECONDS),
+        new ^1^OneForOneStrategy^^(10, Duration.create(5, TimeUnit.SECONDS),
             new Function() {
                 @Override
                 public Directive apply(Throwable t) throws Exception {
-                    return SupervisorStrategy.resume();
+                    return SupervisorStrategy.^2^resume()^^;
                 }
             });
     @Override
-    public SupervisorStrategy supervisorStrategy() {
+    public SupervisorStrategy ^3^supervisorStrategy^^() {
         return strategy;
     }
     </code></pre>
@@ -450,8 +460,10 @@ system.actorOf(Adder.create(42));
 
 <section>
     <section>
-        <h2>Remoting</h2>
-        <img src="img/cluster2.jpg"/>
+        <h2>Remoting & Clustering</h2>
+        <img src="img/servers.jpg"/>
+        <a class="attribution" href="http://www.flickr.com/photos/torkildr/3462607995/">Server room by Torkild
+            Retvedt</a>
         <aside class="notes">
             <ul>
                 <li>remoting is completely driven by configuration</li>
@@ -472,7 +484,7 @@ system.actorOf(Adder.create(42));
     <pre><code data-noescape>
     akka {
         actor {
-            provider = "akka.remote.RemoteActorRefProvider"
+            provider = "akka.remote.^1^RemoteActorRefProvider^^"
         }
         remote {
             enabled-transports = ["akka.remote.netty.tcp"]
@@ -497,8 +509,8 @@ system.actorOf(Adder.create(42));
      akka {
          actor {
              deployment {
-                 /echoActor {
-                    remote = "akka.tcp://remoteSystem@127.0.0.1:2553"
+                 ^1^/echoActor^^ {
+                    remote = "akka.tcp://remoteSystem@^2^127.0.0.1:2553^^"
                  }
              }
          }
@@ -522,7 +534,7 @@ system.actorOf(Adder.create(42));
     <pre><code data-noescape>
         akka {
             actor {
-                provider = "^1^akka.cluster.ClusterActorRefProvider^^"
+                provider = "akka.cluster.^1^ClusterActorRefProvider^^"
             }
             remote {
                 ...
@@ -555,7 +567,8 @@ system.actorOf(Adder.create(42));
 <section>
     <section>
         <h2>Camel Integration</h2>
-        <img src="img/camel.jpg"/>
+        <img src="img/camel2.jpg"/>
+        <a class="attribution" href="http://www.flickr.com/photos/keithroper/11392274975/">Camel by Keith Roper</a>
         <aside class="notes">
             <ul>
                 <li>akka has extensions which can add functionalities</li>
@@ -603,7 +616,8 @@ system.actorOf(Adder.create(42));
 <section>
     <section>
         <h2>Testing</h2>
-        <img src="img/test.jpg"/>
+        <img src="img/test2.jpg"/>
+        <a class="attribution" href="http://www.flickr.com/photos/15461860@N07/3188582479/">almera euroncap</a>
         <aside class="notes">
             <ul>
                 <li>Testkit provides ways to test and inspect actors</li>
@@ -616,16 +630,16 @@ system.actorOf(Adder.create(42));
         <h2>Testing with scalatest</h2>
 
     <pre><code data-noescape>
-    class AdderSpec extends TestKit with ImplicitSender with WordSpec ... {
+    class AdderSpec extends ^1^TestKit^^ with ImplicitSender with WordSpec ... {
         ...
           "An Adder actor" must {
 
             "return 3 as sum of 1 and 2" in {
               val greeter = system.actorOf(Props[Adder])
-              greeter ! new Add(1)
+              ^2^greeter ! new Add(1)^^
               greeter ! new Add(2)
               greeter ! new GetSum()
-              expectMsg(new Sum(3))
+              ^3^expectMsg^^(new Sum(3))
             }
           }
     }
@@ -647,12 +661,12 @@ system.actorOf(Adder.create(42));
     @Test
     public void add2to1() {
         ActorRef adder = system.actorOf(Props.create(Adder.class));
-        JavaTestKit probe = new JavaTestKit(system);
+        JavaTestKit probe = ^1^new JavaTestKit(system)^^;
         adder.tell(new Adder.Add(1), probe.getRef());
         adder.tell(new Adder.Add(2), probe.getRef());
-        adder.tell(new Adder.GetSum(), probe.getRef());
+        adder.tell(new Adder.GetSum(), ^2^probe.getRef()^^);
 
-        probe.expectMsgEquals(new Adder.Sum(3));
+        ^3^probe.expectMsgEquals^^(new Adder.Sum(3));
     }
     </code></pre>
         <aside class="notes">
@@ -669,14 +683,14 @@ system.actorOf(Adder.create(42));
         <h2>TestActorRef</h2>
 
     <pre><code data-noescape>
-    "An Adder actor" must {
-        "know the Answer to the Ultimate Question of Life, the Universe, and Everything" in {
-          val greeter = TestActorRef[Adder]
-          greeter.underlyingActor.sum = 42
-          greeter ! new GetSum()
-          expectMsg(new Sum(42))
-        }
+"An Adder actor" must {
+    "know the Answer to the Question of Life, the Universe, and Everything" in {
+      val greeter = ^1^TestActorRef[Adder]^^
+      greeter.^2^underlyingActor.sum^^ = 42
+      greeter ! new GetSum()
+      expectMsg(new Sum(42))
     }
+}
     </code></pre>
 
         <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#test" target="activator">Code</a>
@@ -691,36 +705,30 @@ system.actorOf(Adder.create(42));
 <section>
     <section>
         <h2>Persistence</h2>
-        <img src=""/>
+        <img src="img/fossil.jpg"/>
+        <a class="attribution" href="http://www.flickr.com/photos/yaffamedia/5894561279/">Fossil by
+            Yaffa Phillips</a>
         <aside class="notes">
             <ul>
                 <li>Introduced with Akka 2.3 (release 6th March)</li>
+                <li>Journaling messages</li>
+                <li>Persist actor state</li>
+                <li>At-Least-One Message Delivery</li>
+                <li>Replay after JVM crash</li>
             </ul>
         </aside>
-    </section>
-    <section>
-        <h2>What is Akka persistence about?</h2>
-
-        <ul>
-            <li>Journaling messages</li>
-            <li>Persist actor state</li>
-            <li>At-Least-One Message Delivery</li>
-            <li>Replay after JVM crash</li>
-            <li></li>
-        </ul>
-
     </section>
 
     <section>
         <h2>Persisting state</h2>
-        <pre><code>
-        public class PersistentAdder extends UntypedProcessor {
+        <pre><code data-noescape="">
+        public class PersistentAdder extends ^1^UntypedProcessor^^ {
             private int sum = 0;
 
             @Override
             public void onReceive(Object message) throws Exception {
-                if (message instanceof Persistent) {
-                    Object payload = ((Persistent) message).payload();
+                if (message instanceof ^2^Persistent^^) {
+                    Object payload = ((Persistent) message).^3^payload()^^;
                     if (payload instanceof Add) {
                         sum += Integer.parseInt(((Add) payload).value);
                     }
@@ -735,15 +743,16 @@ system.actorOf(Adder.create(42));
     <section>
         <h2>Guaranteed delivery</h2>
             <pre><code data-noescape>
-            public void onReceive(Object message){
-                if (message instanceof ConfirmablePersistent) {
-                    ((ConfirmablePersistent) message).confirm();
-                    getSender().tell(((ConfirmablePersistent) message).payload(), getSelf());
-                }
-            }
-            ...
-            ActorRef channel = system.actorOf(Channel.props());
-            channel.tell(Deliver.create(Persistent.create("Hello Echo!"), echoActor.path()), inbox.getRef());
+    public void onReceive(Object message){
+        if (message instanceof ^1^ConfirmablePersistent^^) {
+            ((ConfirmablePersistent) message).^2^confirm()^^;
+            getSender().tell(((ConfirmablePersistent) message).payload(), getSelf());
+        }
+    }
+    ...
+    ActorRef channel = system.actorOf(Channel.props());
+    channel.tell(^3^Deliver.create^^(
+       Persistent.create("Hello Echo!"), ^4^echoActor.path()^^), inbox.getRef());
             </code></pre>
         <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/GuaranteedEcho.java"
            target="activator">Code</a>
@@ -753,17 +762,18 @@ system.actorOf(Adder.create(42));
 <section>
     <section>
         <h2>Akka und Java 8</h2>
+        <img src="img/Lambda.png"/>
     </section>
 
     <section>
         <h2>Lambdafy your Actor</h2>
-        <pre><code>
-        public class MyActor extends AbstractActor {
+        <pre><code data-noescape="">
+        public class MyActor extends ^1^AbstractActor^^ {
 
           @Override
           public PartialFunction<Object, BoxedUnit> receive() {
-            return ReceiveBuilder.
-              match(String.class, s -> {
+            return ^2^ReceiveBuilder^^.
+              ^3^match(String.class, s -> ^^{
                 log.info("Received String message: {}", s);
               }).
               matchAny(o -> log.info("received unknown message")).build();

@@ -65,9 +65,9 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1551"
-     inkscape:window-height="876"
-     inkscape:window-x="49"
+     inkscape:window-width="1871"
+     inkscape:window-height="1176"
+     inkscape:window-x="1649"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="40"
@@ -212,10 +212,9 @@
          x="673.71436"
          y="396.64792">ActorPath</tspan></text>
     <g
-       transform="translate(-248.49844,2.0361829)"
+       transform="translate(-0.49844289,-0.82095994)"
        id="instance2"
-       inkscape:label="#g3811"
-       style="opacity:1">
+       inkscape:label="#g3811">
       <path
          transform="matrix(1.478563,0,0,1.5779973,-175.30242,-172.52435)"
          d="m 305.71429,363.79074 c 0,29.98117 -24.30454,54.28571 -54.28572,54.28571 -29.98117,0 -54.28571,-24.30454 -54.28571,-54.28571 0,-29.98117 24.30454,-54.28571 54.28571,-54.28571 29.98118,0 54.28572,24.30454 54.28572,54.28571 z"
@@ -232,23 +231,23 @@
          id="text3773-2"
          y="379.9512"
          x="205.73146"
-         style="font-size:30.54942322000000132px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         style="font-size:30.54942322px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
          xml:space="preserve"><tspan
            y="379.9512"
            x="205.73146"
            sodipodi:role="line"
            id="tspan3865"
-           style="-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Actor</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">Actor</tspan><tspan
            id="tspan3777-7"
            y="418.13797"
            x="205.73146"
            sodipodi:role="line"
-           style="-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Instance</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">Instance</tspan><tspan
            y="456.32477"
            x="205.73146"
            sodipodi:role="line"
            id="tspan3869"
-           style="-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">2</tspan></text>
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:3.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Mend);fill-opacity:1;opacity:1"
