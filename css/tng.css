@@ -287,6 +287,7 @@ body {
     .reveal .slides section.not-printed {
         display: none !important;
     }
+
 }
 
 .i18n {
@@ -297,3 +298,4 @@ a.attribution {
     font-size: 12px;
     display: block;
 }
+

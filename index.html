@@ -40,6 +40,12 @@
 <!-- Gibt man data-title="foo" an, wird eine Übersichtseite mit Links hier in die Präsentation eingefügt -->
 <section>
     <section>
+        <h2>Akka</h2>
+        <img src="img/akka.jpg"/>
+        <a class="attribution" href="http://en.wikipedia.org/wiki/File:Akka_mountain.jpg">Akka mountain by Arvelius</a>
+    </section>
+
+    <section>
         <h2>What are reactive applications?</h2>
         <blockquote cite="http://www.reactivemanifesto.org/">New requirements demand new technologies - The
             Reactive Manifesto
@@ -114,8 +120,7 @@
             <div id="ani1" style="position: absolute; left:300px; top:50px;opacity:0;">actor programming model</div>
             <div id="ani2" style="position: absolute; left:300px; top:90px;opacity:0;">+ fault tolerance</div>
             <div id="ani3" style="position: absolute; left:300px; top:130px;opacity:0;">+ location transparency</div>
-            <div id="ani4" style="position: absolute; left:550px; top:0px;opacity:0;"><img src="img/happy.jpg"/><a
-                    class="attribution" href="http://www.flickr.com/photos/geishaboy500/2105396244/">Happy by THOR</a>
+            <div id="ani4" style="position: absolute; left:550px; top:0px;opacity:0;"><img src="img/happy2.jpg"/>
             </div>
 
         </div>
@@ -129,24 +134,6 @@
                 <li>aims to ease development of concurrent software</li>
                 <li>developers can concentrate on business logic</li>
                 <li>concerns like fault tolerance, remoting are separated from business logic</li>
-            </ul>
-        </aside>
-    </section>
-
-    <section>
-        <h2>Usage</h2>
-        <ul>
-            <li>web applications (in combination with play)</li>
-            <li>batch processing</li>
-            <li>system integration (in combination with camel)</li>
-            <li>distributed computing</li>
-            <li>really anywhere you would use a JVM...</li>
-        </ul>
-        <aside class="notes">
-            <ul>
-                <li>each actor has a responsibility</li>
-                <li>to get an actor to do something send a message</li>
-                <li>try to keep it simple, most messages should be fire-and-forget</li>
             </ul>
         </aside>
     </section>
@@ -215,7 +202,7 @@ ActorRef add = system.^2^actorOf^^(^3^Props^^.create(Adder.class));
 add.^4^tell^^(new Add(1), null);
     </code></pre>
 
-    <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Adder.java"
+    <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/Adder.java"
        target="activator">Code</a>
     <aside class="notes">
         <ul>
@@ -252,7 +239,7 @@ add.^4^tell^^(new Add(1), null);
     <pre><code data-noescape>
 public static class Adder extends UntypedActor {
 
-    public static Props props(int initialValue) {
+    public static Props ^1^props^^(int initialValue) {
         return Props.create(Adder.class, initialValue);
     }
 
@@ -262,7 +249,7 @@ public static class Adder extends UntypedActor {
 
 }
 ...
-system.actorOf(Adder.props(42));
+system.actorOf(Adder.^2^props^^(42));
     </code></pre>
     </div>
     <aside class="notes">
@@ -365,6 +352,8 @@ system.actorOf(Adder.props(42));
     <section>
         <h2>Resilience</h2>
         <img src="img/supervision.jpg" width="400"/>
+        <a class="attribution" href="http://www.lomolomo.de/2011/04/08/dinge/a-lomo-a-day-08-04-2011-47/">Eltern haften
+            für ihre Kinder by Katharina Hamacher</a>
         <aside class="notes">
             <ul>
                 <li>the basis of resilience in akka is "let it crash", errors are not handled in business logic</li>
@@ -394,6 +383,8 @@ system.actorOf(Adder.props(42));
     <section>
         <h2>The Akka Hierarchy</h2>
         <img src="img/guardians.png"/>
+        <a class="attribution" href="http://doc.akka.io/docs/akka/2.3.0/general/supervision.html">taken from the Akka
+            Documentation</a>
     </section>
     <section>
         <h2>Supervision strategies</h2>
@@ -446,7 +437,7 @@ system.actorOf(Adder.props(42));
     }
     </code></pre>
         <a class="fragment"
-           href="http://localhost:8888/app/hello-akka/#code/app/com/tngtech/akka/supervision/Adder.scala"
+           href="http://localhost:8888/app/akka-code/#code/src/main/java/StringAdder.java"
            target="activator">Code</a>
         <aside class="notes">
             <ul>
@@ -517,7 +508,7 @@ system.actorOf(Adder.props(42));
      }
      </code></pre>
         <a class="fragment"
-           href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/Echo.java"
+           href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/Echo.java"
            target="activator">Code</a>
         <aside class="notes">
             <ul>
@@ -549,7 +540,7 @@ system.actorOf(Adder.props(42));
         }
     </code></pre>
         <a class="fragment"
-           href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/ClusterEcho.java"
+           href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/ClusterEcho.java"
            target="activator">Code</a>
         <aside class="notes">
             <ul>
@@ -599,7 +590,10 @@ system.actorOf(Adder.props(42));
         }
     }
     </code></pre>
-        <a class="fragment" href="http://localhost:4242/greet?greetee=JUGM" target="camel">Example</a>
+        <a class="fragment" href="http://localhost:4242/greet?greetee=JUGM" target="camel">Example</a><br>
+        <a class="fragment"
+           href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/GreetingService.java"
+           target="activator">Code</a>
         <aside class="notes">
             <ul>
                 <li>for a simple web service you simply create a subclass of Consumer</li>
@@ -693,7 +687,7 @@ system.actorOf(Adder.props(42));
 }
     </code></pre>
 
-        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#test" target="activator">Code</a>
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#test" target="activator">Code</a>
         <aside class="notes">
             <ul>
                 <li>if you need to access your actor for testing you can use testactorref</li>
@@ -736,7 +730,7 @@ system.actorOf(Adder.props(42));
             }
         }
         </code></pre>
-        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/PersistentAdder.java"
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/PersistingAdder.java"
            target="activator">Code</a>
     </section>
 
@@ -754,7 +748,7 @@ system.actorOf(Adder.props(42));
     channel.tell(^3^Deliver.create^^(
        Persistent.create("Hello Echo!"), ^4^echoActor.path()^^), inbox.getRef());
             </code></pre>
-        <a class="fragment" href="http://127.0.0.1:8888/app/akka-workshop/#code/src/main/java/GuaranteedEcho.java"
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/GuaranteedEcho.java"
            target="activator">Code</a>
     </section>
 </section>
