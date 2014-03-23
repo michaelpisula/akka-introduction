@@ -31,7 +31,7 @@
 
     <p style="padding-top:15%">
         <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>
-        München, 2014-03-17
+        JavaLand, 2014-03-25
     </p>
     <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
@@ -172,7 +172,7 @@ class Adder extends ^1^UntypedActor^^ {
 
     @Override
     public void ^2^onReceive^^(Object message) throws Exception {
-        if (message instanceof Add) {
+        if (message ^3^instanceof^^ Add) {
             sum += ((Add)message).value;
         } else if (message instanceof GetSum) {
             getSender().tell(new Sum(sum), getSelf());
@@ -437,7 +437,7 @@ system.actorOf(Adder.^2^props^^(42));
     }
     </code></pre>
         <a class="fragment"
-           href="http://localhost:8888/app/akka-code/#code/src/main/java/StringAdder.java"
+           href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/StringAdder.java"
            target="activator">Code</a>
         <aside class="notes">
             <ul>
@@ -590,7 +590,7 @@ system.actorOf(Adder.^2^props^^(42));
         }
     }
     </code></pre>
-        <a class="fragment" href="http://localhost:4242/greet?greetee=JUGM" target="camel">Example</a><br>
+        <a class="fragment" href="http://localhost:4242/greet?greetee=JavaLand" target="camel">Example</a><br>
         <a class="fragment"
            href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/GreetingService.java"
            target="activator">Code</a>
@@ -755,6 +755,58 @@ system.actorOf(Adder.^2^props^^(42));
 
 <section>
     <section>
+        <h2>Putting it together</h2>
+        <img src="img/lego.jpg"/>
+        <a class="attribution" href="http://www.flickr.com/photos/48763139@N00/2432400623">Lego Bricks by
+            Benjamin Esham</a>
+    </section>
+
+    <section>
+        <h2>Actors are your building blocks</h2>
+        <ul>
+            <li>Keep actor logic short</li>
+            <li>Do not block in actors</li>
+            <li>Use meaningful names</li>
+        </ul>
+        <aside class="notes">
+            <ul>
+                <li>With good actors building a system is easy</li>
+                <li>The receive method should finish fast</li>
+                <li>If you really have to block, use special dispatchers</li>
+                <li>Naming things is hard, try to find good names for actors and messages</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Designing a system</h2>
+        <ul>
+            <li>Actor systems are message-based</li>
+            <li>Design patterns need to be message-based</li>
+            <li class="fragment no-burn">Enterprise Integration Patterns to the rescue:
+                <ul>
+                    <li>Pipes and Filters</li>
+                    <li>Scatter-Gather</li>
+                    <li>Aggregator</li>
+                    <li>...</li>
+                </ul>
+            </li>
+        </ul>
+        <aside class="notes">
+            <ul>
+                <li>Message-based systems need their own design language</li>
+                <li>Fortunately Hohpe & Woolf wrote EIP</li>
+                <li>65 patterns for message-based systems</li>
+                <li>Pipes & Filters for easily composable filtering pipeline</li>
+                <li>Scatter-Gather to parallelize processing steps for one message</li>
+                <li>Aggregator to combine distinct information into one message</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+
+<section>
+    <section>
         <h2>Akka und Java 8</h2>
         <img src="img/Lambda.png"/>
     </section>
@@ -770,7 +822,8 @@ system.actorOf(Adder.^2^props^^(42));
               ^3^match(String.class, s -> ^^{
                 log.info("Received String message: {}", s);
               }).
-              matchAny(o -> log.info("received unknown message")).build();
+              matchAny(o -> log.info("received unknown message")).
+              build();
           }
         }
         </code></pre>
@@ -783,11 +836,39 @@ system.actorOf(Adder.^2^props^^(42));
     </section>
 </section>
 
+<section>
+    <section>
+        <h2>Learning Akka</h2>
+    </section>
+
+    <section>
+        <h2>Typesafe Activator</h2>
+        <ul>
+
+            <li>Great tool to learn about Akka</li>
+            <li>Many templates exist, from Hello World to complex examples</li>
+            <li>81 templates are currently available, >30 for Akka</li>
+        </ul>
+        <br>
+        <a class="fragment" href="http://www.typesafe.com/platform/getstarted">Link</a>
+    </section>
+
+    <section>
+        <h2>Books</h2>
+        <ul>
+            <li>Akka Concurrency, Derek Wyatt</li>
+            <li>Akka in Action, Raymond Roestenburg</li>
+        </ul>
+    </section>
+</section>
+
 <!-- Danke Slide -->
 <section>
     <h1>Thank you!</h1>
 
     <h2 class="fragment">Questions?</h2>
+
+    <h2 class="fragment">Happy Hakking!</h2>
 
     <p>
         <a href="mailto:michael.pisula@tngtech.com">michael.pisula@tngtech.com</a><br>
