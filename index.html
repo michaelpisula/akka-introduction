@@ -218,49 +218,6 @@ add.^4^tell^^(new Add(1), null);
 </section>
 
 <section>
-    <h2>Props</h2>
-    <pre><code data-noescape>
-        Props props1 = ^1^Props.create(SimpleCalc.class)^^;
-        Props props2 = ^2^Props.create(SimpleCalc.class, 5)^^;
-    </code></pre>
-    <aside class="notes">
-        <ul>
-            <li>In order to be able to restart actors, reproducible way to create actors is needed</li>
-            <li>Props with the wanted type are used</li>
-            <li>Props can be given arguments to use when creating actors with non-default constructor</li>
-            <li>Props are stored, and can be used to recreate actor</li>
-        </ul>
-    </aside>
-</section>
-<section>
-    <h2>Props</h2>
-
-    <div class="fragment no-burn" data-fragment-index="0">Best practice:
-    <pre><code data-noescape>
-public static class Adder extends UntypedActor {
-
-    public static Props ^1^props^^(int initialValue) {
-        return Props.create(Adder.class, initialValue);
-    }
-
-    public Adder(int initialValue) {
-        ...
-    }
-
-}
-...
-system.actorOf(Adder.^2^props^^(42));
-    </code></pre>
-    </div>
-    <aside class="notes">
-        <ul>
-            <li>Recommended to have a static factory method for props</li>
-            <li>Better to deal with changes, e.g. new arguments</li>
-            <li>Integration with Dependency Injection also possible, some work necessary</li>
-        </ul>
-    </aside>
-</section>
-<section>
     <h2>Inside an Actor</h2>
 
     <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
