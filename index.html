@@ -30,8 +30,8 @@
     <h3>Reactive Applications made easy</h3>
 
     <p style="padding-top:15%">
-        <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>
-        JavaLand, 2014-03-25
+        <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>,
+        München, 2014-04-30
     </p>
     <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
@@ -141,29 +141,29 @@
 </section>
 
 <section>
-<section>
-    <h2>Actors</h2>
+    <section>
+        <h2>Actors</h2>
 
 
-    <img src="img/actor.jpg"/>
+        <img src="img/actor.jpg"/>
 
-    <a class="attribution" href="http://www.flickr.com/photos/gnuckx/4816756390/">Venetian Carnival Mask - Creative
-        Commons by
-        gnuckx</a>
-    <aside class="notes">
-        actors are main building blocks,
-        they:
-        <ul>
-            <li>Introduced 1973 by Carl Hewitt</li>
-            <li>encapsulate business logic</li>
-            <li>can hold state</li>
-            <li>only can be used by sending messages</li>
-        </ul>
-    </aside>
-</section>
+        <a class="attribution" href="http://www.flickr.com/photos/gnuckx/4816756390/">Venetian Carnival Mask - Creative
+            Commons by
+            gnuckx</a>
+        <aside class="notes">
+            actors are main building blocks,
+            they:
+            <ul>
+                <li>Introduced 1973 by Carl Hewitt</li>
+                <li>encapsulate business logic</li>
+                <li>can hold state</li>
+                <li>only can be used by sending messages</li>
+            </ul>
+        </aside>
+    </section>
 
-<section>
-    <h2>Creating an Actor is easy</h2>
+    <section>
+        <h2>Creating an Actor is easy</h2>
 
         <pre><code data-noescape>
 class Adder extends ^1^UntypedActor^^ {
@@ -182,18 +182,18 @@ class Adder extends ^1^UntypedActor^^ {
 
 }
         </code></pre>
-    <aside class="notes">
-        <ul>
-            <li>you need a subclass of Actor</li>
-            <li>overwrite receive</li>
-            <li>write code for your message types</li>
-            <li>send response to sender</li>
-        </ul>
-    </aside>
-</section>
+        <aside class="notes">
+            <ul>
+                <li>you need a subclass of Actor</li>
+                <li>overwrite receive</li>
+                <li>write code for your message types</li>
+                <li>send response to sender</li>
+            </ul>
+        </aside>
+    </section>
 
-<section>
-    <h2>Working with Actors</h2>
+    <section>
+        <h2>Working with Actors</h2>
 
 
     <pre><code data-noescape>
@@ -202,107 +202,107 @@ ActorRef add = system.^2^actorOf^^(^3^Props^^.create(Adder.class));
 add.^4^tell^^(new Add(1), null);
     </code></pre>
 
-    <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/Adder.java"
-       target="activator">Code</a>
-    <aside class="notes">
-        <ul>
-            <li>first you need to create an actor system</li>
-            <li>create actor using actorOf</li>
-            <li>use tell to send your message</li>
-            <li>Actors are more lightweight than threads</li>
-            <li>you can create tons of actors</li>
-            <li>actors should work through their messages very fast, avoid blocking if possible</li>
-            <li>no direct method calls on actors</li>
-        </ul>
-    </aside>
-</section>
+        <a class="fragment" href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/Adder.java"
+           target="activator">Code</a>
+        <aside class="notes">
+            <ul>
+                <li>first you need to create an actor system</li>
+                <li>create actor using actorOf</li>
+                <li>use tell to send your message</li>
+                <li>Actors are more lightweight than threads</li>
+                <li>you can create tons of actors</li>
+                <li>actors should work through their messages very fast, avoid blocking if possible</li>
+                <li>no direct method calls on actors</li>
+            </ul>
+        </aside>
+    </section>
 
-<section>
-    <h2>Inside an Actor</h2>
+    <section>
+        <h2>Inside an Actor</h2>
 
-    <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
-        <initial>
-            <state data-id="arrow1" data-property="opacity" data-value="0"></state>
-            <state data-id="arrow2" data-property="opacity" data-value="0"></state>
-            <state data-id="arrow3" data-property="opacity" data-value="0"></state>
-            <state data-id="instance" data-property="opacity" data-value="0"></state>
-            <state data-id="instance2" data-property="opacity" data-value="0"></state>
-            <state data-id="x" data-property="opacity" data-value="0"></state>
-            <state data-id="mailbox" data-property="opacity" data-value="0"></state>
-            <state data-id="ref" data-property="opacity" data-value="0"></state>
-            <state data-id="incarnation" data-property="opacity" data-value="0"></state>
-            <state data-id="text2" data-property="opacity" data-value="0"></state>
-        </initial>
-        <animation duration="500">
-            <animate data-id="mailbox" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="incarnation" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="ref" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="text2" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="instance" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
-            <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
-            <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="x" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="instance" data-property="opacity" data-value="0"></animate>
-            <animate data-id="x" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
-            <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="instance2" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="instance2" data-property="transform" data-value="translate(0,0)"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
-        </animation>
-        <animation duration="500">
-            <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
-        </animation>
-    </div>
-    <aside class="notes">
-        <ul>
-            <li>as seen in the last example actorOf returns ActorRef, not the Actor</li>
-            <li>mailbox should be independent of instance</li>
-            <li>incarnation encapsulates mailbox and instance</li>
-            <li>actor ref references incarnation</li>
-            <li>ref can be obtained by creating or searching by path</li>
-            <li>instance can be replaced when crashed without losing mailbox or ref</li>
-        </ul>
-    </aside>
-</section>
+        <div class="svg animated-svg" src="img/actorref.svg" style="text-align: left; width: 1386px; height: 446px;">
+            <initial>
+                <state data-id="arrow1" data-property="opacity" data-value="0"></state>
+                <state data-id="arrow2" data-property="opacity" data-value="0"></state>
+                <state data-id="arrow3" data-property="opacity" data-value="0"></state>
+                <state data-id="instance" data-property="opacity" data-value="0"></state>
+                <state data-id="instance2" data-property="opacity" data-value="0"></state>
+                <state data-id="x" data-property="opacity" data-value="0"></state>
+                <state data-id="mailbox" data-property="opacity" data-value="0"></state>
+                <state data-id="ref" data-property="opacity" data-value="0"></state>
+                <state data-id="incarnation" data-property="opacity" data-value="0"></state>
+                <state data-id="text2" data-property="opacity" data-value="0"></state>
+            </initial>
+            <animation duration="500">
+                <animate data-id="mailbox" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="incarnation" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="ref" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="text2" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="x" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance" data-property="opacity" data-value="0"></animate>
+                <animate data-id="x" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow1" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="1"></animate>
+                <animate data-id="arrow1" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow2" data-property="opacity" data-value="0"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance2" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="instance2" data-property="transform" data-value="translate(0,0)"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <animation duration="500">
+                <animate data-id="arrow3" data-property="opacity" data-value="0"></animate>
+            </animation>
+        </div>
+        <aside class="notes">
+            <ul>
+                <li>as seen in the last example actorOf returns ActorRef, not the Actor</li>
+                <li>mailbox should be independent of instance</li>
+                <li>incarnation encapsulates mailbox and instance</li>
+                <li>actor ref references incarnation</li>
+                <li>ref can be obtained by creating or searching by path</li>
+                <li>instance can be replaced when crashed without losing mailbox or ref</li>
+            </ul>
+        </aside>
+    </section>
 </section>
 
 <section>
@@ -547,7 +547,7 @@ add.^4^tell^^(new Add(1), null);
         }
     }
     </code></pre>
-        <a class="fragment" href="http://localhost:4242/greet?greetee=JavaLand" target="camel">Example</a><br>
+        <a class="fragment" href="http://localhost:4242/greet?greetee=Akka" target="camel">Example</a><br>
         <a class="fragment"
            href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/GreetingService.java"
            target="activator">Code</a>
@@ -710,7 +710,7 @@ add.^4^tell^^(new Add(1), null);
     </section>
 </section>
 
-<section>
+<!--<section>
     <section>
         <h2>Putting it together</h2>
         <img src="img/lego.jpg"/>
@@ -791,7 +791,7 @@ add.^4^tell^^(new Add(1), null);
             </ul>
         </aside>
     </section>
-</section>
+</section>-->
 
 <section>
     <section>
@@ -825,7 +825,7 @@ add.^4^tell^^(new Add(1), null);
 
     <h2 class="fragment">Questions?</h2>
 
-    <h2 class="fragment">Happy Hakking!</h2>
+    <h2 class="fragment">Happy hAkking!</h2>
 
     <p>
         <a href="mailto:michael.pisula@tngtech.com">michael.pisula@tngtech.com</a><br>
