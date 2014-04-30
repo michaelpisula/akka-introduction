@@ -47,8 +47,8 @@
 
     <section>
         <h2>What are reactive applications?</h2>
-        <blockquote cite="http://www.reactivemanifesto.org/">New requirements demand new technologies - The
-            Reactive Manifesto
+        <blockquote cite="http://www.reactivemanifesto.org/">New requirements demand new technologies
+            - The Reactive Manifesto
         </blockquote>
         <div class="animated-html" style="overflow: hidden; position: relative; width: 900px; height: 600px;">
             <animation data-duration="250">
@@ -321,6 +321,65 @@ add.^4^tell^^(new Add(1), null);
         </aside>
     </section>
     <section>
+        <h2>Hierachies in Akka</h2>
+
+        <div class="animated-html" style="overflow: hidden; position: relative; width: 900px; height: 600px;">
+
+            <animation data-duration="250">
+                <animate data-id="akka" data-property="background-color" data-value="#ffff00"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="akka" data-property="background-color" data-value="#ffffff"></animate>
+                <animate data-id="system" data-property="background-color" data-value="#ffff00"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="system" data-property="background-color" data-value="#ffffff"></animate>
+                <animate data-id="ani1" data-property="background-color" data-value="#ffff00"></animate>
+                <animate data-id="ani2" data-property="background-color" data-value="#ffff00"></animate>
+            </animation>
+            <animation data-duration="500">
+                <animate data-id="ani1" data-property="background-color" data-value="#ffffff"></animate>
+                <animate data-id="ani2" data-property="background-color" data-value="#ffffff"></animate>
+                <animate data-id="akka" data-property="left" data-value="400px"></animate>
+                <animate data-id="system" data-property="left" data-value="505px"></animate>
+                <animate data-id="ani1" data-property="left" data-value="505px"></animate>
+                <animate data-id="ani1" data-property="top" data-value="100px"></animate>
+                <animate data-id="ani2" data-property="top" data-value="130px"></animate>
+                <animate data-id="ani2" data-property="left" data-value="470px"></animate>
+                <animate data-id="ani3" data-property="top" data-value="170px"></animate>
+                <animate data-id="ani3" data-property="left" data-value="470px"></animate>
+                <animate data-id="ani4" data-property="top" data-value="200px"></animate>
+                <animate data-id="ani4" data-property="left" data-value="420px"></animate>
+                <animate data-id="ani5" data-property="top" data-value="240px"></animate>
+                <animate data-id="ani5" data-property="left" data-value="440px"></animate>
+                <animate data-id="ani6" data-property="top" data-value="280px"></animate>
+                <animate data-id="ani6" data-property="left" data-value="390px"></animate>
+            </animation>
+            <animation data-duration="250">
+                <animate data-id="ani7" data-property="opacity" data-value="1"></animate>
+                <animate data-id="ani8" data-property="opacity" data-value="1"></animate>
+            </animation>
+            <div id="akka" style="position: absolute; left:0px; top:50px;">akka://</div>
+            <div id="system" style="position: absolute; left:105px; top:50px;">ActorSystem</div>
+            <div id="ani1" style="position: absolute; left:300px; top:50px;">/</div>
+            <div id="ani2" style="position: absolute; left:310px; top:50px;">user</div>
+            <div id="ani3" style="position: absolute; left:375px; top:50px;">/</div>
+            <div id="ani4" style="position: absolute; left:390px; top:50px;">parent</div>
+            <div id="ani5" style="position: absolute; left:490px; top:50px;">/</div>
+            <div id="ani6" style="position: absolute; left:505px; top:50px;">childA</div>
+            <div id="ani7" style="position: absolute; left:490px; top:240px;opacity: 0;">\</div>
+            <div id="ani8" style="position: absolute; left:505px; top:280px;opacity: 0;">childB</div>
+
+        </div>
+        <aside class="notes">
+            <ul>
+                <li>to create a hierarchy you need children instead of top level actors</li>
+                <li>every actor can create new children on its context</li>
+                <li>children have a ref to their parent</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
         <h2>Creating a hierarchy is easy</h2>
 
     <pre><code data-noescape>
@@ -334,27 +393,6 @@ add.^4^tell^^(new Add(1), null);
                 <li>to create a hierarchy you need children instead of top level actors</li>
                 <li>every actor can create new children on its context</li>
                 <li>children have a ref to their parent</li>
-            </ul>
-        </aside>
-    </section>
-    <section>
-        <h2>The Akka Hierarchy</h2>
-        <img src="img/guardians.png"/>
-        <a class="attribution" href="http://doc.akka.io/docs/akka/2.3.0/general/supervision.html">taken from the Akka
-            Documentation</a>
-    </section>
-    <section>
-        <h2>Supervision strategies</h2>
-        <ul>
-            <li class="fragment">One For One</li>
-            <li class="fragment">All For One</li>
-        </ul>
-        <aside class="notes">
-            <ul>
-                <li>there are predefined strategies</li>
-                <li>one for one will only act on the child that threw the exception</li>
-                <li>all for one will act on all children if one throws an exception</li>
-                <li>good for undisciplined children</li>
             </ul>
         </aside>
     </section>
@@ -373,6 +411,21 @@ add.^4^tell^^(new Add(1), null);
                 <li>you can restart the actor, if the actor has state it will be lost</li>
                 <li>you can stop the actor, if recovery is not possible</li>
                 <li>you can escalate the problem to your parent</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Supervision strategies</h2>
+        <ul>
+            <li class="fragment">One For One</li>
+            <li class="fragment">All For One</li>
+        </ul>
+        <aside class="notes">
+            <ul>
+                <li>there are predefined strategies</li>
+                <li>one for one will only act on the child that threw the exception</li>
+                <li>all for one will act on all children if one throws an exception</li>
+                <li>good for undisciplined children</li>
             </ul>
         </aside>
     </section>
@@ -547,10 +600,10 @@ add.^4^tell^^(new Add(1), null);
         }
     }
     </code></pre>
-        <a class="fragment" href="http://localhost:4242/greet?greetee=Akka" target="camel">Example</a><br>
         <a class="fragment"
            href="http://127.0.0.1:8888/app/akka-code/#code/src/main/java/GreetingService.java"
            target="activator">Code</a>
+        <a class="fragment" href="http://localhost:4242/greet?greetee=Akka" target="camel">Example</a><br>
         <aside class="notes">
             <ul>
                 <li>for a simple web service you simply create a subclass of Consumer</li>
