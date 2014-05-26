@@ -299,3 +299,28 @@ a.attribution {
     display: block;
 }
 
+.reveal table.contact {
+    margin-top: 100px;
+}
+
+.reveal table.contact div.email {
+    content: url(../img/email-32x32.png);
+}
+
+.reveal table.contact div.xing {
+    content: url(../img/xing-32x32.png);
+}
+
+.reveal table.contact div.twitter {
+    content: url(../img/twitter-32x32.png);
+}
+
+.reveal table.contact td {
+    padding: 1px;
+    vertical-align: middle;
+}
+
+.reveal table.contact a {
+    font-size: 20px;
+    text-decoration: none;
+}
