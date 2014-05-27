@@ -1,0 +1,21 @@
+.reveal>.slides section table.no-outer-border {
+    border: 0;
+}
+
+.reveal>.slides section table.no-outer-border {
+    font-size: 70%;
+}
+
+.reveal>.slides section table.no-outer-border tr td {
+    border: 0;
+    padding: 0 10px;
+}
+
+.reveal>.slides section table.no-outer-border tr:first-child td {
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.reveal>.slides section table.no-outer-border tr td:not(:first-child) {
+    border-left: 1px solid black;
+}

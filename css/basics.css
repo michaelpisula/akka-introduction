@@ -1,0 +1,51 @@
+#data-information-container {
+    position: absolute;
+
+    margin-left: 200px;
+    margin-top: 90px;
+
+    width: 600px;
+}
+
+#data-information-container .data-or-information {
+    background-color: lightgrey;
+    text-align: center;
+
+    width: 100%;
+    height: 45px;
+}
+
+#data-information-container .between {
+    text-align: center;
+
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#data-information-container .between:nth-child(4) {
+    margin-top: 50px;
+}
+
+#data-information-container .between:nth-child(8) {
+    margin-bottom: 50px;
+}
+
+#data-information-container .arrow-up, #data-information-container .arrow-down {
+    position: absolute;
+
+    width: 30px;
+    height: 380px;
+}
+
+#data-information-container .arrow-up {
+    left: 10px;
+    top: 32px;
+}
+
+#data-information-container .arrow-down {
+    left: 560px;
+    top: 32px;
+
+    -webkit-transform: rotate(180deg);
+}
