@@ -2,6 +2,8 @@
 ## Slides for Akka talk
 ### by Michael Pisula - TNG Technology Consulting
 
+[View slides here](http://michaelpisula.github.io/akka-introduction)
+
 #### Slides
 There is one animation on those slides, to see it you will need to access the presentation using a (simple) web server.
 e.g.
